@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-__author__ = 'Michael Liao'
+__author__ = 'David Yang'
 
 '''
 JSON API definition.
@@ -14,7 +14,7 @@ class Page(object):
     Page object for display pages.
     '''
 
-    def __init__(self, item_count, page_index=1, page_size=10):
+    def __init__(self, item_count, page_index=1, page_size=6):
         '''
         Init Pagination by item_count, page_index and page_size.
 

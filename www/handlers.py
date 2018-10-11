@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-__author__ = 'Michael Liao'
+__author__ = 'David Yang'
 
 ' url handlers '
 
@@ -79,14 +79,14 @@ def cookie2user(cookie_str):
 def index(*, page='1'):
     page_index = get_page_index(page)
     num = yield from Blog.findNumber('count(id)')
-    page = Page(num)
+    p = Page(num, page_index)
     if num == 0:
         blogs = []
     else:
-        blogs = yield from Blog.findAll(orderBy='created_at desc', limit=(page.offset, page.limit))
+        blogs = yield from Blog.findAll(orderBy='created_at desc', limit=(p.offset, p.limit))
     return {
         '__template__': 'blogs.html',
-        'page': page,
+        'page': p,
         'blogs': blogs
     }
 
@@ -95,7 +95,7 @@ def get_blog(id):
     blog = yield from Blog.find(id)
     comments = yield from Comment.findAll('blog_id=?', [id], orderBy='created_at desc')
     for c in comments:
-        c.html_content = text2html(c.content)
+        c.html_content = markdown2.markdown(c.content)
     blog.html_content = markdown2.markdown(blog.content)
     return {
         '__template__': 'blog.html',
@@ -309,4 +309,23 @@ def api_delete_blog(request, *, id):
     check_admin(request)
     blog = yield from Blog.find(id)
     yield from blog.remove()
+    return dict(id=id)
+
+@post('/api/users/{id}/delete') # api for deleting an user
+async def api_delete_users(id, request):
+    check_admin(request)
+    id_buff = id
+    user = await User.find(id)
+    if user is None:
+        raise APIResourceNotFoundError('Comment')
+    await user.remove()
+    # 给被删除的用户在评论中标记
+    comments = await Comment.findAll('user_id=?',[id])
+    if comments:
+        for comment in comments:
+            id = comment.id
+            c = await Comment.find(id)
+            c.user_name = c.user_name + ' (该用户已被删除)'
+            await c.update()
+    id = id_buff
     return dict(id=id)

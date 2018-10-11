@@ -1,67 +1,82 @@
 <!DOCTYPE html>
-<!--
+
 {% macro pagination(url, page) %}
-    <ul class="uk-pagination">
+    <ul class="uk-pagination" uk-margin>
         {% if page.has_previous %}
-            <li><a href="{{ url }}{{ page.page_index - 1 }}"><i class="uk-icon-angle-double-left"></i></a></li>
+            <li><a href="{{ url }}{{ page.page_index - 1 }}"><span uk-pagination-previous></span></a></li>
         {% else %}
-            <li class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>
+            <li class="uk-disabled"><a href="#"><span uk-pagination-previous></span></a></li>
         {% endif %}
             <li class="uk-active"><span>{{ page.page_index }}</span></li>
         {% if page.has_next %}
-            <li><a href="{{ url }}{{ page.page_index + 1 }}"><i class="uk-icon-angle-double-right"></i></a></li>
+            <li><a href="{{ url }}{{ page.page_index + 1 }}"><span uk-pagination-next></span></a></li>
         {% else %}
-            <li class="uk-disabled"><span><i class="uk-icon-angle-double-right"></i></span></li>
+            <li class="uk-disabled"><a href="#"><span uk-pagination-next></span></a></li>
         {% endif %}
     </ul>
 {% endmacro %}
--->
+
 <html>
 <head>
+    <meta name="google-site-verification" content="eyHQMblP1rFevWeZ8e1VgpTa-BFH2DTnme1Oymgm-UM" />
     <meta charset="utf-8" />
     {% block meta %}<!-- block meta  -->{% endblock %}
-    <title>{% block title %} ? {% endblock %} - Awesome David Blog</title>
+    <title>{% block title %} ? {% endblock %} - AwesomeDavidBlog</title>
+    <link rel="stylesheet" href="/static/css/uikit.css">
+    <link rel="stylesheet" href="/static/css/uikit-rtl.css">
     <link rel="stylesheet" href="/static/css/uikit.min.css">
-    <link rel="stylesheet" href="/static/css/uikit.gradient.min.css">
+    <link rel="stylesheet" href="/static/css/uikit-rtl.min.css">
     <link rel="stylesheet" href="/static/css/awesome.css" />
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/sha1.min.js"></script>
+    <script src="/static/js/uikit.js"></script>
+    <script src="/static/js/icons.js"></script>
     <script src="/static/js/uikit.min.js"></script>
+    <script src="/static/js/icons.min.js"></script>
     <script src="/static/js/sticky.min.js"></script>
     <script src="/static/js/vue.min.js"></script>
-    <script src="/static/js/awesome.js"></script>
+    <script src="/static/js/awesome.js"></script>  
     {% block beforehead %}<!-- before head  -->{% endblock %}
 </head>
 <body>
-    <nav class="uk-navbar uk-navbar-attached uk-margin-bottom">
-        <div class="uk-container uk-container-center">
-            <a href="/" class="uk-navbar-brand">Awesome David Blog! </a>
+    <script type="text/javascript" src="https://kongchenglc.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+    <canvas id="c_n14" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 1;"></canvas>
+    <div class="uk-margin-large-bottom" style="background-color:rgba(198,198,198,0.2);">
+    <div class="uk-container uk-container-medium">
+    <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+        <div class="uk-navbar-left uk-margin-medium-top uk-margin-medium-bottom">
+            <a class="uk-navbar-item uk-logo uk-margin-small-right" href="/">
+                <span class="uk-icon uk-margin-small-right" uk-icon="lemon2" ratio="2"></span>
+                 凹大卜  
+            </a>
             <ul class="uk-navbar-nav">
-                <li data-url="blogs"><a href="/"><i class="uk-icon-home"></i> Articles</a></li>
-                <li><a target="_blank" href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000"><i class="uk-icon-book"></i> Tutorial</a></li>
-                <li><a target="_blank" href="https://github.com/michaelliao/awesome-python3-webapp"><i class="uk-icon-code"></i> Coding</a></li>
+                <li data-url="blogs"><a href="/"> Articles | 日志</a></li>
+                <li><a target="_blank" href="http://www.liaoxuefeng.com"> Tutorial | 教程</a></li>
+                <li><a target="_blank" href="https://github.com/michaelliao/awesome-python3-webapp"> Coding | 编程</a></li>
             </ul>
-            <div class="uk-navbar-flip">
-                <ul class="uk-navbar-nav">
-                {% if __user__ %}
-                    <li class="uk-parent" data-uk-dropdown>
-                        <a href="#0"><i class="uk-icon-user"></i> {{ __user__.name }}</a>
-                        <div class="uk-dropdown uk-dropdown-navbar">
-                            <ul class="uk-nav uk-nav-navbar">
-                                <li><a href="/signout"><i class="uk-icon-sign-out"></i> Logout</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                {% else %}
-                    <li><a href="/signin"><i class="uk-icon-sign-in"></i> Login</a></li>
-                    <li><a href="/register"><i class="uk-icon-edit"></i> Register</a></li>
-                {% endif %}
-                </ul>
-            </div>
+        </div>
+        <div class="uk-navbar-right uk-margin-medium-top uk-margin-medium-bottom">
+            <ul class="uk-navbar-nav">
+            {% if __user__ %}
+                <li>
+                    <a href="#0"> {{ __user__.name }}</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li><a href="/signout"> Logout</a></li>
+                        </ul>
+                    </div>
+                </li>
+            {% else %}
+                <li><a href="/signin"> Login</a></li>
+                <li><a href="/register"> Register</a></li>
+            {% endif %}
+            </ul>
         </div>
     </nav>
+    </div>
+    </div>
 
-    <div class="uk-container uk-container-center">
+    <div class="uk-container uk-container-medium">
         <div class="uk-grid">
             <!-- content -->
             {% block content %}
@@ -70,16 +85,17 @@
         </div>
     </div>
 
-    <div class="uk-margin-large-top" style="background-color:#eee; border-top:1px solid #ccc;">
+    <div class="uk-margin-large-top" style="background-color:rgba(198,198,198,0.2)">
         <div class="uk-container uk-container-center uk-text-center">
-            <div class="uk-panel uk-margin-top uk-margin-bottom">
+            <div class="uk-margin-medium-top uk-margin-large-bottom">
                 <p>
-                    <a target="_blank" href="http://weibo.com/liaoxuefeng" class="uk-icon-button uk-icon-weibo"></a>
-                    <a target="_blank" href="https://github.com/michaelliao" class="uk-icon-button uk-icon-github"></a>
-                    <a target="_blank" href="http://www.linkedin.com/in/liaoxuefeng" class="uk-icon-button uk-icon-linkedin-square"></a>
-                    <a target="_blank" href="https://twitter.com/liaoxuefeng" class="uk-icon-button uk-icon-twitter"></a>
+                    <a target="_blank" href="https://github.com/yzyly1992" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="github"></a>
+                    <a target="_blank" href="https://www.instagram.com/yzyly/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="instagram"></a>
+                    <a target="_blank" href="#" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="soundcloud"></a>
+                    <a target="_blank" href="https://www.weibo.com/208883610/" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="weibo"></a>
+                    <a target="_blank" href="https://www.linkedin.com/in/zhiyuan-yang-9204b8134/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="linkedin"></a>
                 </p>
-                <p>Powered by <a href="http://awesome.liaoxuefeng.com">Awesome David Blog!</a>. Copyright &copy; 2018. [<a href="/manage/" target="_blank">Manage</a>]</p>
+                <p>Powered by <a href="http://www.sla-dk.com">Awesome David Blog!</a> Copyright &copy; 2018. [<a href="/manage/" target="_blank">Manage</a>]</p>
                 <p><a href="http://www.sla-dk.com/" target="_blank">Zhiyuan Yang</a>. All rights reserved.</p>
             </div>
 

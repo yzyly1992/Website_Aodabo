@@ -15,6 +15,12 @@ function initVM(data) {
             page: data.page
         },
         methods: {
+            previous: function () {
+                gotoPage(this.page.page_index - 1);
+            },
+            next: function () {
+                gotoPage(this.page.page_index + 1);
+            },
             delete_comment: function (comment) {
                 var content = comment.content.length > 20 ? comment.content.substring(0, 20) + '...' : comment.content;
                 if (confirm('确认要删除评论“' + comment.content + '”？删除后不可恢复！')) {
@@ -49,13 +55,11 @@ $(function() {
 {% block content %}
 
     <div class="uk-width-1-1 uk-margin-bottom">
-        <div class="uk-panel uk-panel-box">
-            <ul class="uk-breadcrumb">
-                <li class="uk-active"><span>评论</span></li>
-                <li><a href="/manage/blogs">日志</a></li>
-                <li><a href="/manage/users">用户</a></li>
-            </ul>
-        </div>
+        <ul class="uk-breadcrumb">
+            <li class="uk-active"><span>评论</span></li>
+            <li><a href="/manage/blogs">日志</a></li>
+            <li><a href="/manage/users">用户</a></li>
+        </ul>
     </div>
 
     <div id="error" class="uk-width-1-1">
@@ -65,14 +69,14 @@ $(function() {
         <span><i class="uk-icon-spinner uk-icon-medium uk-icon-spin"></i> 正在加载...</span>
     </div>
 
-    <div id="vm" class="uk-width-1-1" style="display:none">
-        <table class="uk-table uk-table-hover">
+    <div id="vm" class="uk-width-1-1">
+        <table class="uk-table uk-table-justify uk-table-divider">
             <thead>
                 <tr>
-                    <th class="uk-width-2-10">作者</th>
-                    <th class="uk-width-5-10">内容</th>
-                    <th class="uk-width-2-10">创建时间</th>
-                    <th class="uk-width-1-10">操作</th>
+                    <th class="uk-text-left uk-width-small">作者</th>
+                    <th class="uk-text-left">内容</th>
+                    <th class="uk-text-left uk-table-expand">创建时间</th>
+                    <th class="uk-text-left uk-width-small">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,11 +91,19 @@ $(function() {
                         <span v-text="comment.created_at.toDateTime()"></span>
                     </td>
                     <td>
-                        <a href="#0" v-on="click: delete_comment(comment)"><i class="uk-icon-trash-o"></i>
+                        <a href="#0" v-on="click: delete_comment(comment)">删除</a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <div v-component="pagination" v-with="page"></div>
+        <div class="uk-width-1-1 uk-text-center">
+        <ul class="uk-pagination">
+            <li v-if="! page.has_previous" class="uk-disabled"><span><i uk-icon="chevron-left"></i></span></li>
+            <li v-if="page.has_previous"><a v-on="click: previous()" href="#0"><i uk-icon="chevron-left"></i></a></li>
+            <li class="uk-active"><span v-text="page.page_index"></span></li>
+            <li v-if="! page.has_next" class="uk-disabled"><span><i uk-icon="chevron-right"></i></span></li>
+            <li v-if="page.has_next"><a v-on="click: next()" href="#0"><i uk-icon="chevron-right"></i></a></li>
+        </ul>
+        </div>
     </div>
 {% endblock %}

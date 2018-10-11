@@ -1,0 +1,66 @@
+{% extends '__base__.html' %}
+
+{% block title %}登陆{% endblock %}
+
+{% block beforehead %}
+
+<script>
+
+$(function() {
+    var vmAuth = new Vue({
+        el: '#vm',
+        data: {
+            email: '',
+            passwd: ''
+        },
+        methods: {
+            submit: function(event) {
+                event.preventDefault();
+                var $form = $('#vm');
+                var email = this.email.trim().toLowerCase();
+                var data = {
+                        email: email,
+                        passwd: this.passwd==='' ? '' : CryptoJS.SHA1(email + ':' + this.passwd).toString()
+                    };
+                $form.postJSON('/api/authenticate', data, function(err, result) {
+                    if (! err) {
+                        location.assign('/');
+                    }
+                });
+            }
+        }
+    });
+    $('#vm').show();
+});
+
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="uk-width-2-3">
+        <h1>欢迎登陆！</h1>
+        <form id="vm" v-on="submit: submit" class="uk-form-stacked">
+            <div class="uk-alert uk-alert-danger uk-hidden"></div>
+            <div class="uk-margin-top">
+                <label class="uk-form-label">电子邮箱:</label>
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon="user"></span>
+                    <input class="uk-input uk-form-width-medium" v-model="email" type="text" maxlength="50" placeholder="Email">
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <label class="uk-form-label">输入口令:</label>
+                <div class="uk-inline">
+                    <span class="uk-form-icon uk-form-icon-flip" uk-icon="lock"></span>
+                    <input class="uk-input uk-form-width-medium" v-model="passwd" type="password" maxlength="50" placeholder="口令">
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <button type="submit" class="uk-button uk-button-primary"> 登陆</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

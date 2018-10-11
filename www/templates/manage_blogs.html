@@ -14,6 +14,12 @@ function initVM(data) {
             page: data.page
         },
         methods: {
+            previous: function () {
+                gotoPage(this.page.page_index - 1);
+            },
+            next: function () {
+                gotoPage(this.page.page_index + 1);
+            },
             edit_blog: function (blog) {
                 location.assign('/manage/blogs/edit?id=' + blog.id);
             },
@@ -51,13 +57,11 @@ $(function() {
 {% block content %}
 
     <div class="uk-width-1-1 uk-margin-bottom">
-        <div class="uk-panel uk-panel-box">
-            <ul class="uk-breadcrumb">
-                <li><a href="/manage/comments">评论</a></li>
-                <li class="uk-active"><span>日志</span></li>
-                <li><a href="/manage/users">用户</a></li>
-            </ul>
-        </div>
+        <ul class="uk-breadcrumb">
+            <li><a href="/manage/comments">评论</a></li>
+            <li class="uk-active"><span>日志</span></li>
+            <li><a href="/manage/users">用户</a></li>
+        </ul>
     </div>
 
     <div id="error" class="uk-width-1-1">
@@ -70,13 +74,13 @@ $(function() {
     <div id="vm" class="uk-width-1-1">
         <a href="/manage/blogs/create" class="uk-button uk-button-primary"><i class="uk-icon-plus"></i> 新日志</a>
 
-        <table class="uk-table uk-table-hover">
+        <table class="uk-table uk-table-divider">
             <thead>
                 <tr>
-                    <th class="uk-width-5-10">标题 / 摘要</th>
-                    <th class="uk-width-2-10">作者</th>
-                    <th class="uk-width-2-10">创建时间</th>
-                    <th class="uk-width-1-10">操作</th>
+                    <th class="uk-table-expand uk-text-left"> 标题</th>
+                    <th class="uk-text-left">作者</th>
+                    <th class="uk-text-left">创建时间</th>
+                    <th class="uk-text-left">操作</th>
                 </tr>
             </thead>
             <tbody>
@@ -91,14 +95,21 @@ $(function() {
                         <span v-text="blog.created_at.toDateTime()"></span>
                     </td>
                     <td>
-                        <a href="#0" v-on="click: edit_blog(blog)"><i class="uk-icon-edit"></i>
-                        <a href="#0" v-on="click: delete_blog(blog)"><i class="uk-icon-trash-o"></i>
+                        <a href="#0" v-on="click: edit_blog(blog)">编辑</a>
+                        <a href="#0" v-on="click: delete_blog(blog)">删除</a>
                     </td>
                 </tr>
             </tbody>
         </table>
-
-        <div v-component="pagination" v-with="page"></div>
+        <div class="uk-width-1-1 uk-text-center">
+        <ul class="uk-pagination">
+            <li v-if="! page.has_previous" class="uk-disabled"><span><i uk-icon="chevron-left"></i></span></li>
+            <li v-if="page.has_previous"><a v-on="click: previous()" href="#0"><i uk-icon="chevron-left"></i></a></li>
+            <li class="uk-active"><span v-text="page.page_index"></span></li>
+            <li v-if="! page.has_next" class="uk-disabled"><span><i uk-icon="chevron-right"></i></span></li>
+            <li v-if="page.has_next"><a v-on="click: next()" href="#0"><i uk-icon="chevron-right"></i></a></li>
+        </ul>
+        </div>
     </div>
 
 {% endblock %}

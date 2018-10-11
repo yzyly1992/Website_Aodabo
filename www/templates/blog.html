@@ -31,14 +31,14 @@ $(function () {
 
 {% block content %}
 
-    <div class="uk-width-medium-3-4">
+    <div class="uk-width-3-4">
         <article class="uk-article">
             <h2>{{ blog.name }}</h2>
             <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}</p>
             <p>{{ blog.html_content|safe }}</p>
         </article>
 
-        <hr class="uk-article-divider">
+        <hr>
 
     {% if __user__ %}
         <h3>发表评论</h3>
@@ -50,18 +50,20 @@ $(function () {
             </header>
             <div class="uk-comment-body">
                 <form id="form-comment" class="uk-form">
-                    <div class="uk-alert uk-alert-danger uk-hidden"></div>
-                    <div class="uk-form-row">
-                        <textarea rows="6" placeholder="说点什么吧" style="width:100%;resize:none;"></textarea>
-                    </div>
-                    <div class="uk-form-row">
-                        <button type="submit" class="uk-button uk-button-primary"><i class="uk-icon-comment"></i> 发表评论</button>
-                    </div>
+                    <fieldset class="uk-fieldset">
+                        <div class="uk-alert uk-alert-danger uk-hidden"></div>
+                        <div class="uk-margin">
+                            <textarea class="uk-textarea" rows="6" placeholder="说点什么吧"></textarea>
+                        </div>
+                        <div class="uk-margin">
+                            <button type="submit" class="uk-button uk-button-primary"> 发表评论</button>
+                        </div>
+                    </fieldset>
                 </form>
             </div>
         </article>
 
-        <hr class="uk-article-divider">
+        <hr>
     {% endif %}
 
         <h3>最新评论</h3>
@@ -87,20 +89,14 @@ $(function () {
 
     </div>
 
-    <div class="uk-width-medium-1-4">
-        <div class="uk-panel uk-panel-box">
+    <div class="uk-width-1-4">
+        <div class="uk-card uk-card-default">
+            <div class="uk-card-body">
             <div class="uk-text-center">
                 <img class="uk-border-circle" width="120" height="120" src="{{ blog.user_image }}">
-                <h3>{{ blog.user_name }}</h3>
+                <h4>{{ blog.user_name }}</h4>
             </div>
-        </div>
-        <div class="uk-panel uk-panel-header">
-            <h3 class="uk-panel-title">友情链接</h3>
-            <ul class="uk-list uk-list-line">
-                <li><i class="uk-icon-link"></i> <a href="#">编程</a></li>
-                <li><i class="uk-icon-link"></i> <a href="#">景观</a></li>
-                <li><i class="uk-icon-link"></i> <a href="#">读书</a></li>
-            </ul>
+            </div>
         </div>
     </div>
 

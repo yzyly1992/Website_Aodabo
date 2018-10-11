@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--
+{% macro pagination(url, page) %}
+    <ul class="uk-pagination">
+        {% if page.has_previous %}
+            <li><a href="{{ url }}{{ page.page_index - 1 }}"><i class="uk-icon-angle-double-left"></i></a></li>
+        {% else %}
+            <li class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>
+        {% endif %}
+            <li class="uk-active"><span>{{ page.page_index }}</span></li>
+        {% if page.has_next %}
+            <li><a href="{{ url }}{{ page.page_index + 1 }}"><i class="uk-icon-angle-double-right"></i></a></li>
+        {% else %}
+            <li class="uk-disabled"><span><i class="uk-icon-angle-double-right"></i></span></li>
+        {% endif %}
+    </ul>
+{% endmacro %}
+-->
+<html>
+<head>
+    <meta name="google-site-verification" content="eyHQMblP1rFevWeZ8e1VgpTa-BFH2DTnme1Oymgm-UM" />
+    <meta charset="utf-8" />
+    {% block meta %}<!-- block meta  -->{% endblock %}
+    <title>{% block title %} ? {% endblock %} - Awesome David Blog</title>
+    <link rel="stylesheet" href="/static/css/uikit.css">
+    <link rel="stylesheet" href="/static/css/uikit-rtl.css">
+    <link rel="stylesheet" href="/static/css/uikit.min.css">
+    <link rel="stylesheet" href="/static/css/uikit-rtl.min.css">
+    <link rel="stylesheet" href="/static/css/awesome.css" />
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/sha1.min.js"></script>
+    <script src="/static/js/uikit.min.js"></script>
+    <script src="/static/js/uikit-icons.min.js"></script>
+    <script src="/static/js/uikit.js"></script>
+    <script src="/static/js/uikit-icons.js"></script>
+    <script src="/static/js/sticky.min.js"></script>
+    <script src="/static/js/vue.min.js"></script>
+    <script src="/static/js/awesome.js"></script>
+    {% block beforehead %}<!-- before head  -->{% endblock %}
+</head>
+<body>
+    <script type="text/javascript" src="https://kongchenglc.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+    <canvas id="c_n14" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 1;"></canvas>
+    <nav class="uk-navbar-container uk-margin" uk-navbar>
+        <div class="uk-navbar-left">
+
+            <a class="uk-navbar-item uk-logo" href="#">
+                <span class="uk-icon uk-margin-small-right" uk-icon="icon: pagekit; ratio: 2"></span>
+                 ADB/凹大卜  
+            </a>
+            <ul class="uk-navbar-nav">
+                <li data-url="blogs"><a href="/"> Articles/日志</a></li>
+                <li><a target="_blank" href="http://www.liaoxuefeng.com"> Tutorial/教程</a></li>
+                <li><a target="_blank" href="https://github.com/michaelliao/awesome-python3-webapp"> Coding/编程</a></li>
+            </ul>
+
+        </div>
+        <div class="uk-navbar-right">
+        
+            <ul class="uk-navbar-nav">
+            {% if __user__ %}
+                <li>
+                    <a href="#0"> {{ __user__.name }}</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li><a href="/signout"> Logout</a></li>
+                        </ul>
+                    </div>
+                </li>
+            {% else %}
+                <li><a href="/signin"> Login</a></li>
+                <li><a href="/register"> Register</a></li>
+            {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="uk-container uk-container-large">
+        <div class="uk-grid">
+            <!-- content -->
+            {% block content %}
+            {% endblock %}
+            <!-- // content -->
+        </div>
+    </div>
+
+    <div class="uk-margin-large-top" style="background-color:#eee; border-top:1px solid #ccc;">
+        <div class="uk-container uk-container-center uk-text-center">
+            <div class="uk-margin-top">
+                <p>
+                    <a target="_blank" href="https://github.com/yzyly1992" class="uk-icon-button uk-margin-small-right" uk-icon="github"></a>
+                    <a target="_blank" href="https://www.instagram.com/yzyly/" class="uk-icon-button uk-margin-small-right" uk-icon="instagram"></a>
+                    <a target="_blank" href="#" class="uk-icon-button uk-margin-small-right" uk-icon="soundcloud"></a>
+                    <a target="_blank" href="https://www.linkedin.com/in/zhiyuan-yang-9204b8134/" class="uk-icon-button uk-margin-small-right" uk-icon="linkedin"></a>
+                </p>
+                <p>Powered by <a href="http://www.sla-dk.com">Awesome David Blog!</a> Copyright &copy; 2018. [<a href="/manage/" target="_blank">Manage</a>]</p>
+                <p><a href="http://www.sla-dk.com/" target="_blank">Zhiyuan Yang</a>. All rights reserved.</p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

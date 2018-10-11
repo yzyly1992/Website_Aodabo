@@ -1,0 +1,65 @@
+{% extends '__base__.html' %}
+
+{% block title %}Article/日志{% endblock %}
+
+{% block beforehead %}
+
+<script>
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="uk-width-3-4">
+    {% for blog in blogs %}
+        <article class="uk-article">
+            <h2><a href="/blog/{{ blog.id }}">{{ blog.name }}</a></h2>
+            <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}</p>
+            <p>{{ blog.summary }}</p>
+            <p><a href="/blog/{{ blog.id }}">继续阅读 <i class="uk-icon-angle-double-right"></i></a></p>
+        </article>
+        <hr>
+    {% endfor %}
+    {{ pagination('/?page=', page) }}
+    </div>
+
+    
+    <div class="uk-width-1-4">
+        <div class="uk-card uk-card-default">
+            <div class="uk-card-body">
+            <h3 class="uk-card-title">站内搜索</h3>
+            <FORM method=GET action="http://www.google.com/search">
+
+                <TABLE bgcolor="#FFFFFF">
+                    <tr>
+                        <td>
+                            <div class="uk-inline uk-margin-small">
+                                <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: search"></a>
+                                <INPUT class="uk-input" TYPE=text name=q size=31 maxlength=255 value="">
+                            </div>
+                            <font size=-1>
+                                <INPUT TYPE=hidden name=domains value="sla-dk.com"><br>
+                                <INPUT TYPE=radio class="uk-margin-small-bottom" name=sitesearch value=""> G.S  
+                                <INPUT TYPE=radio class="uk-margin-small-bottom" name=sitesearch value="sla-dk.com" checked> 本站搜索 </br>
+                            </font>
+                            <button TYPE=submit name=btnG class="uk-button uk-button-default"> SEARCH</button>
+                        </td>
+                    </tr>
+                </TABLE>
+            </FORM>
+            </div>
+        </div>
+        <div class="uk-card uk-card-default uk-margin-top">
+            <div class="uk-card-body">
+                <h3 class="uk-card-title">亲密链接</h3>
+                <ul class="uk-list uk-list-divider">
+                    <li><a target="_blank" href="http://www.davidzyang.com/">Secret/镜像</a></li>
+                    <li><a target="_blank" href="http://lilidai-landscape.com/">Lilidai/景观</a></li>
+                    <li><a target="_blank" href="https://www.jiumodiary.com/">Reading/读书</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
