@@ -4,12 +4,12 @@ Awesome David Blog (ADB) 凹大卜
 A Personal Webapp written by David Yang. Revised from Micheal Liao's tutorial. 
 The website is mainly built by Python3. 
 
-Database: MySQL
-Services: nginx, supervisor, python3, mysql-server
-Libraries in python3: aiomysql, aiohttp, jinja2
-Front-end framework: UIkit
-JavaScript framework: Vue.js
-Writing format syntax: MarkDown
+Database: MySQL;
+Services: nginx, supervisor, python3, mysql-server;
+Libraries in python3: aiomysql, aiohttp, jinja2;
+Front-end framework: UIkit;
+JavaScript framework: Vue.js;
+Writing format syntax: MarkDown;
 
 Features:
 1. Register and Login
