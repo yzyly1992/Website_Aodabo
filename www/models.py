@@ -36,6 +36,7 @@ class Blog(Model):
     summary = StringField(ddl='varchar(200)')
     content = TextField()
     created_at = FloatField(default=time.time)
+    tag = StringField(ddl='varchar(50)')
 
 class Comment(Model):
     __table__ = 'comments'

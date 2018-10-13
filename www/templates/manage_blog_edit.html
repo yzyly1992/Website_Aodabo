@@ -47,7 +47,8 @@ $(function () {
         initVM({
             name: '',
             summary: '',
-            content: ''
+            content: '',
+            tag: ''
         });
     }
 });
@@ -92,6 +93,12 @@ $(function () {
                 <label class="uk-form-label">内容:</label>
                 <div class="uk-form-controls">
                     <textarea v-model="content" rows="12" name="content" placeholder="内容" class="uk-textarea" style="resize:none;"></textarea>
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <label class="uk-form-label">标签:</label>
+                <div class="uk-form-controls">
+                    <input v-model="tag" name="tag" type="text" placeholder="标签" class="uk-input uk-form-width-large">
                 </div>
             </div>
             <div class="uk-margin-top">
