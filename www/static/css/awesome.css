@@ -15,3 +15,13 @@ a:hover, a:active {
     display: none;
     margin-bottom: 15px;
 }
+html{
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+}
+body{
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+}

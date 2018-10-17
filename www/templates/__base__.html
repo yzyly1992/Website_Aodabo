@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 {% macro pagination(page) %}
-    <ul class="uk-pagination" uk-margin>
+    <ul class="uk-pagination uk-flex-center uk-margin-medium-top uk-margin-large-bottom">
         {% if page.has_previous %}
             <li><a href="?page={{ page.page_index - 1 }}"><span uk-pagination-previous></span></a></li>
         {% else %}
@@ -18,10 +18,20 @@
 
 <html>
 <head>
-    <meta name="google-site-verification" content="eyHQMblP1rFevWeZ8e1VgpTa-BFH2DTnme1Oymgm-UM" />
+    <meta name="google-site-verification" content="eKqBMmzuBuRLUDW-_3A2z6tWCufHqpueCwcCttltZI4" />
+    <meta name="baidu-site-verification" content="rAg9A4zDFw" />
+    <meta name="msvalidate.01" content="D04A574C1B8A6CC7733D9C24CAECDFB6" />
+    <meta name="sogou_site_verification" content="gvrs1Yw0Hx"/>
+    <meta name="360-site-verification" content="ca60ba7c670d24eb178f328051acad6c" />
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,initial-scale=0.9,minimum-scale=0.9,maximum-scale=0.9,user-scalable=no">
+    <meta name="wap-font-scale" content="no">
+    <meta name="description" content="An original blog dedicated to sharing interesting concept, technology, design and practice. 一个致力于分享各种有趣概念,技术,设计,及实践的个人原创博客.">
+    <meta name="keywords" content="aodabo,凹大卜,编程,游戏,景观,建筑,设计,虚拟现实,Landscape,Architecture,Design,AR,VR,游戏引擎,GIS,QGIS,ArcGIS,Unity,Blender,Engine,Arduino,social sensing">
     {% block meta %}<!-- block meta  -->{% endblock %}
-    <title>{% block title %} ? {% endblock %} - AwesomeDavidBlog</title>
+    <title>{% block title %} ? {% endblock %}| AwesomeDavidBlog</title>
     <link rel="stylesheet" href="/static/css/uikit.css">
     <link rel="stylesheet" href="/static/css/uikit-rtl.css">
     <link rel="stylesheet" href="/static/css/uikit.min.css">
@@ -39,24 +49,27 @@
     {% block beforehead %}<!-- before head  -->{% endblock %}
 </head>
 <body>
-    <script type="text/javascript" src="https://kongchenglc.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+    <script type="text/javascript">
+        if (screen.width>960)
+        document.write('<script type="text/javascript" src="https://kongchenglc.github.io/lib/canvas-nest/canvas-nest.min.js"><\/script>');
+    </script>
     <canvas id="c_n14" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 1;"></canvas>
-    <div class="uk-margin-large-bottom" style="background-color:rgba(100,150,185,0.2);">
+    <div class="uk-margin-medium-bottom uk-visible@m" style="background-color:rgba(100,150,185,0);">
     <div class="uk-container uk-container-medium">
-    <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
-        <div class="uk-navbar-left uk-margin-large-top uk-margin-large-bottom">
-            <a class="uk-navbar-item uk-logo uk-margin-right" href="/">
+    <nav class="uk-navbar-container" uk-navbar style="background-color:rgba(255,255,255,0);">
+        <div class="uk-navbar-left uk-margin-medium-top uk-margin-medium-bottom">
+            <a class="uk-navbar-item uk-logo uk-margin-small-right" href="/">
                 <span class="uk-icon uk-margin-left uk-margin-small-right" uk-icon="lemon4" ratio="2"></span>
                  凹大卜  
             </a>
             <ul class="uk-navbar-nav">
-                <li data-url="blogs"><a href="/"> Article | 日志</a></li>
+                <li><a href="/"> Article | 日志</a></li>
                 <li><a href="/tags/tutorial"> Tutorial | 教程</a></li>
                 <li><a href="/tags/landscape"> Landscape | 景观</a></li>
                 <li><a href="/tags/tutorial"> Coding | 编程</a></li>
             </ul>
         </div>
-        <div class="uk-navbar-right uk-margin-medium-top uk-margin-medium-bottom uk-margin-large-right">
+        <div class="uk-navbar-right uk-margin-medium-top uk-margin-medium-bottom">
             <ul class="uk-navbar-nav">
             {% if __user__ %}
                 <li>
@@ -77,16 +90,49 @@
     </div>
     </div>
 
+    <nav class="uk-navbar-container uk-margin-medium uk-hidden@m" uk-navbar style="background-color:rgba(255,255,255,0);">
+        <div class="uk-navbar-left">
+            <a class="uk-navbar-item uk-logo" href="/">
+                <span class="uk-icon uk-margin-small-right" uk-icon="lemon4" ratio="2"></span>
+                 凹大卜  
+            </a>
+        </div>
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+            <li>
+            <a class="uk-navbar-toggle" uk-toggle="target: #offcanvas-nav" uk-navbar-toggle-icon></a>
+
+            <div id="offcanvas-nav" uk-offcanvas="overlay: true; flip: true">
+            <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+            <ul class="uk-nav uk-nav-default uk-margin-auto-vertical">
+                <li><a href="/"> Article | 日志</a></li>
+                <li><a href="/tags/tutorial"> Tutorial | 教程</a></li>
+                <li><a href="/tags/landscape"> Landscape | 景观</a></li>
+                <li><a href="/tags/tutorial"> Coding | 编程</a></li>
+                <li class="uk-nav-divider"></li>
+                {% if __user__ %}
+                <li><a href="/signout"> Logout | 注销</a></li>
+                {% else %}
+                <li><a href="/signin"> Login | 登陆</a></li>
+                <li><a href="/register"> Register | 注册</a></li>
+                {% endif %}
+            </ul>
+            </div>
+            </div>
+            </li>
+            </ul>
+        </div>
+    </nav>
+
+
     <div class="uk-container uk-container-medium">
-        <div class="uk-grid">
             <!-- content -->
             {% block content %}
             {% endblock %}
             <!-- // content -->
-        </div>
     </div>
 
-    <div class="uk-margin-large-top" style="background-color:rgba(100,150,198,0.2)">
+    <div class="uk-margin-large-top uk-visible@m" style="background-color:rgba(100,150,198,0)">
         <div class="uk-container uk-container-center uk-text-center">
             <div class="uk-margin-medium-top uk-margin-large-bottom">
                 <p>
@@ -96,11 +142,26 @@
                     <a target="_blank" href="https://www.weibo.com/208883610/" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="weibo"></a>
                     <a target="_blank" href="https://www.linkedin.com/in/zhiyuan-yang-9204b8134/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="linkedin"></a>
                 </p>
-                <p>Powered by <a href="http://www.sla-dk.com">Awesome David Blog!</a> Copyright &copy; 2018. [<a href="/manage/" target="_blank">Manage</a>]</p>
-                <p><a href="http://www.sla-dk.com/" target="_blank">Zhiyuan Yang</a>. All rights reserved.</p>
+                <p>Powered by <a href="https://aodabo.tech">Awesome David Blog!</a> Copyright &copy; 2018. [<a href="/manage/" target="_blank">Manage</a>]</p>
+                <p><a href="https://aodabo.tech/" target="_blank">Zhiyuan Yang</a>. All rights reserved.</p>
             </div>
 
         </div>
     </div>
+
+    <div class="uk-margin-medium uk-hidden@m">
+    <div class="uk-container uk-container-center uk-text-center">
+        <p>
+            <a target="_blank" href="https://github.com/yzyly1992" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="github"></a>
+            <a target="_blank" href="https://www.instagram.com/yzyly/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="instagram"></a>
+            <a target="_blank" href="#" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="soundcloud"></a>
+            <a target="_blank" href="https://www.weibo.com/208883610/" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="weibo"></a>
+            <a target="_blank" href="https://www.linkedin.com/in/zhiyuan-yang-9204b8134/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="linkedin"></a>
+        </p>
+        <p>Powered by <a href="https://aodabo.tech">AwesomeDavidBlog!</a> Copyright &copy; 2018. [<a href="/manage/" target="_blank">Manage</a>]</p>
+        <p><a href="https://aodabo.tech/" target="_blank">Zhiyuan Yang</a>. All rights reserved.</p>
+    </div>
+    </div>
+
 </body>
 </html>

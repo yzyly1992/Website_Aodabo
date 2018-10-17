@@ -90,6 +90,12 @@ def index(*, page='1'):
         'blogs': blogs
     }
 
+@get('/sitemap')
+def sitemap():
+    return {
+        '__template__': 'sitemap.txt'
+    }
+
 @get('/blog/{id}')
 def get_blog(id):
     blog = yield from Blog.find(id)

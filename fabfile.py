@@ -60,7 +60,7 @@ def deploy():
 
 
 def build():
-    includes = ['static', 'templates', 'transwarp', 'favicon.ico', '*.py']
+    includes = ['static', 'templates', 'transwarp', 'favicon.ico', '*.py', '*.txt']
     excludes = ['test', '.*', '*.pyc', '*.pyo']
     local('rm -f dist/%s' % _TAR_FILE)
     with lcd(os.path.join(os.path.abspath('.'), 'www')):

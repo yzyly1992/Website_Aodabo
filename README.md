@@ -20,3 +20,11 @@ Features:
 6. Show multi-media through MarkDown
 7. Edit and manage Blogs
 8. Manage Users and Comments
+
+Features will add:
+1. Share system
+2. Pay system
+3. Read Count(valine.js)
+4. Safty System
+5. Certification
+6. Update Comment System(valine.js)

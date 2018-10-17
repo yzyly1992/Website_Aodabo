@@ -38,9 +38,9 @@ $(function() {
 {% endblock %}
 
 {% block content %}
-
-    <div class="uk-width-2-3">
-        <h1>SIGNIN/欢迎登陆！</h1>
+    <div class="uk-grid">
+    <div class="uk-width-1-1">
+        <h4>SIGNIN/欢迎登陆！</h4>
         <form id="vm" v-on="submit: submit" class="uk-form-stacked">
             <div class="uk-alert uk-alert-danger uk-hidden"></div>
             <div class="uk-margin-top">
@@ -61,6 +61,7 @@ $(function() {
                 <button type="submit" class="uk-button uk-button-primary">SIGNIN/登陆</button>
             </div>
         </form>
+    </div>
     </div>
 
 {% endblock %}

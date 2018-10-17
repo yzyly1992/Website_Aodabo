@@ -2,25 +2,23 @@ server {
     # 监听80端口，作用是将用户http的请求转发到https
     listen      80;
     # 绑定的域名
-    server_name sla-dk.com;
-    rewrite ^(.*)$  https://www.sla-dk.com permanent;
+    server_name aodabo.tech www.aodabo.tech;
+    rewrite ^(.*)$  https://aodabo.tech permanent;
 }
 
 server {
-    # 下面这部分就是从阿里云下载AC认证那里直接拷贝过来的配置
     listen 443;
+    server_name aodabo.tech www.aodabo.tech;
     ssl on;
-    ssl_certificate   /etc/nginx/cert/1_sla-dk.com_bundle.crt;
-    ssl_certificate_key  /etc/nginx/cert/2_sla-dk.com.key;
+    ssl_certificate   /etc/nginx/cert/1541060403472.pem;
+    ssl_certificate_key  /etc/nginx/cert/1541060403472.key;
     ssl_session_timeout 5m;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
     ssl_prefer_server_ciphers on;
-
     root       /srv/awesome/www;
     access_log /srv/awesome/log/access_log;
     error_log  /srv/awesome/log/error_log;
-    server_name sla-dk.com;
 
     client_max_body_size 1m;
 
@@ -46,4 +44,25 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
+}
+
+
+server {
+    listen 80;
+    listen 443 ssl;
+    server_name sla-dk.com www.sla-dk.com;
+    ssl_certificate   /etc/nginx/cert/1_sla-dk.com_bundle.crt;
+    ssl_certificate_key  /etc/nginx/cert/2_sla-dk.com.key;
+    ssl_session_timeout 5m;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE;
+    ssl_prefer_server_ciphers on;
+
+    if ( $scheme = "http" ) {
+    return 301 https://aodabo.tech$request_uri;
+    }
+
+    location / {
+    rewrite ^(.*)$ https://aodabo.tech permanent;
+    }
 }

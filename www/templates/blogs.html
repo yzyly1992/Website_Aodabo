@@ -4,13 +4,10 @@
 
 {% block beforehead %}
 
-<script>
-</script>
-
 {% endblock %}
 
 {% block content %}
-
+    <div class="uk-grid  uk-visible@m">
     <div class="uk-width-3-4">
     {% for blog in blogs %}
         <article class="uk-article">
@@ -24,17 +21,16 @@
     {{ pagination(page) }}
     </div>
 
-    
-    <div class="uk-width-1-4">
+    <div class="uk-width-1-4 uk-visible@m">
             <h4>站内搜索</h4>
-            <FORM method=GET action="http://www.google.com/search">
+            <FORM method=GET action="https://www.google.com/search">
                 <div class="uk-inline">
                     <a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="search"></a>
                     <INPUT class="uk-input" TYPE=text name=q placeholder="站内搜索" size=31 maxlength=255 value="">
                 </div>
                 <font size=-1>
-                    <INPUT TYPE=hidden name=domains value="sla-dk.com"><br>
-                    <INPUT TYPE=hidden name=sitesearch value="sla-dk.com"></br>
+                    <INPUT TYPE=hidden name=domains value="aodabo.tech"><br>
+                    <INPUT TYPE=hidden name=sitesearch value="aodabo.tech"></br>
                 </font>
                 <button TYPE=submit name=btnG class="uk-button uk-button-default"> SEARCH</button>
 
@@ -47,6 +43,20 @@
                     <li><a target="_blank" href="http://lilidai-landscape.com/">Lilidai/景观</a></li>
                     <li><a target="_blank" href="https://www.jiumodiary.com/">Reading/读书</a></li>
             </ul>
+    </div>
+    </div>
+
+    <div class="uk-hidden@m">
+    {% for blog in blogs %}
+        <article class="uk-article">
+            <h5><a href="/blog/{{ blog.id }}">{{ blog.name }}</a></h5>
+            <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}</p>
+            <p>{{ blog.summary }}</p>
+            <p><a href="/blog/{{ blog.id }}">继续阅读 <i class="uk-icon-angle-double-right"></i></a></p>
+        </article>
+        <hr>
+    {% endfor %}
+    {{ pagination(page) }}
     </div>
 
 

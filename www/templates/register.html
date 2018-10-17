@@ -58,9 +58,9 @@ $(function () {
 {% endblock %}
 
 {% block content %}
-
-    <div class="uk-width-2-3">
-        <h1>REGISTER/欢迎注册！</h1>
+    <div class="uk-grid">
+    <div class="uk-width-1-1">
+        <h4>REGISTER/欢迎注册！</h4>
         <form id="vm" v-on="submit: submit" class="uk-form-stacked">
             <div class="uk-alert uk-alert-danger uk-hidden"></div>
             <div class="uk-margin-top">
@@ -81,16 +81,17 @@ $(function () {
                     <input class="uk-input uk-form-width-medium" v-model="password1" type="password" maxlength="50" placeholder="输入口令">
                 </div>
             </div>
-            <div class="uk-margin-top">
+            <div class="uk-margin">
                 <label class="uk-form-label">REPEAT PASSWORD/重复口令:</label>
                 <div class="uk-form-controls">
                     <input class="uk-input uk-form-width-medium" v-model="password2" type="password" maxlength="50" placeholder="重复口令">
                 </div>
             </div>
-            <div class="uk-margin-top">
+            <div class="uk-margin-large">
                 <button type="submit" class="uk-button uk-button-primary"><i class="uk-icon-user"></i>REGISTER/注册</button>
             </div>
         </form>
+    </div>
     </div>
 
 {% endblock %}
