@@ -4,29 +4,9 @@
 
 {% block beforehead %}
 
-<script>
-
-var comment_url = '/api/blogs/{{ blog.id }}/comments';
-
-$(function () {
-    var $form = $('#form-comment');
-    $form.submit(function (e) {
-        e.preventDefault();
-        $form.showFormError('');
-        var content = $form.find('textarea').val().trim();
-        if (content==='') {
-            return $form.showFormError('请输入评论内容！');
-        }
-        $form.postJSON(comment_url, { content: content }, function (err, result) {
-            if (err) {
-                return $form.showFormError(err);
-            }
-            refresh();
-        });
-    });
-});
-</script>
-
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    
 {% endblock %}
 
 {% block content %}
@@ -34,59 +14,23 @@ $(function () {
     <div class="uk-width-3-4">
         <article class="uk-article">
             <h2>{{ blog.name }}</h2>
-            <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}</p>
+            <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}
+            </p>
             <p>{{ blog.html_content|safe }}</p>
         </article>
-
         <hr>
-
-    {% if __user__ %}
-        <h3>发表评论</h3>
-
-        <article class="uk-comment">
-            <header class="uk-comment-header">
-                <img class="uk-comment-avatar uk-border-circle" width="50" height="50" src="{{ __user__.image }}">
-                <h4 class="uk-comment-title">{{ __user__.name }}</h4>
-            </header>
-            <div class="uk-comment-body">
-                <form id="form-comment" class="uk-form">
-                    <fieldset class="uk-fieldset">
-                        <div class="uk-alert uk-alert-danger uk-hidden"></div>
-                        <div class="uk-margin">
-                            <textarea class="uk-textarea" rows="6" placeholder="说点什么吧"></textarea>
-                        </div>
-                        <div class="uk-margin">
-                            <button type="submit" class="uk-button uk-button-primary"> 发表评论</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </article>
-
-        <hr>
-    {% endif %}
-
-        <h3>最新评论</h3>
-
-        <ul class="uk-comment-list">
-            {% for comment in comments %}
-            <li>
-                <article class="uk-comment">
-                    <header class="uk-comment-header">
-                        <img class="uk-comment-avatar uk-border-circle" width="50" height="50" src="{{ comment.user_image }}">
-                        <h4 class="uk-comment-title">{{ comment.user_name }} {% if comment.user_id==blog.user_id %}(作者){% endif %}</h4>
-                        <p class="uk-comment-meta">{{ comment.created_at|datetime }}</p>
-                    </header>
-                    <div class="uk-comment-body">
-                        {{ comment.html_content|safe }}
-                    </div>
-                </article>
-            </li>
-            {% else %}
-            <p>还没有人评论...</p>
-            {% endfor %}
-        </ul>
-
+        <div id="adb-comments"></div>
+        <script>
+        new Valine({
+            el: '#adb-comments' ,
+            appId: 'yOh6osJCPwYE5iPogVER2fGn-gzGzoHsz',
+            appKey: 'Y6buYFx7Qp61y3tjqScrQwzs',
+            notify:false, 
+            verify:false, 
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+            meta: ['nick','mail'] 
+        });
+        </script>  
     </div>
 
     <div class="uk-width-1-4 uk-visible@m">
@@ -104,59 +48,27 @@ $(function () {
     <div class="uk-hidden@m">
         <article class="uk-article">
             <h3>{{ blog.name }}</h3>
-            <p class="uk-article-meta">{{ blog.user_name }} 发表于{{ blog.created_at|datetime }}</p>
+            <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}
+            <span id="busuanzi_container_page_pv""> 浏览量 <span id="busuanzi_value_page_pv"></span></span>
+            </p>
             <p>{{ blog.html_content|safe }}</p>
         </article>
 
         <hr>
-
-    {% if __user__ %}
-        <h4>发表评论</h4>
-
-        <article class="uk-comment">
-            <header class="uk-comment-header">
-                <img class="uk-comment-avatar uk-border-circle" width="50" height="50" src="{{ __user__.image }}">
-                <h5 class="uk-comment-title">{{ __user__.name }}</h5>
-            </header>
-            <div class="uk-comment-body">
-                <form id="form-comment" class="uk-form">
-                    <fieldset class="uk-fieldset">
-                        <div class="uk-alert uk-alert-danger uk-hidden"></div>
-                        <div class="uk-margin">
-                            <textarea class="uk-textarea" rows="6" placeholder="说点什么吧"></textarea>
-                        </div>
-                        <div class="uk-margin">
-                            <button type="submit" class="uk-button uk-button-primary"> 发表评论</button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        </article>
-
-        <hr>
-    {% endif %}
-
-        <h4>最新评论</h4>
-
-        <ul class="uk-comment-list">
-            {% for comment in comments %}
-            <li>
-                <article class="uk-comment">
-                    <header class="uk-comment-header">
-                        <img class="uk-comment-avatar uk-border-circle" width="50" height="50" src="{{ comment.user_image }}">
-                        <h5 class="uk-comment-title">{{ comment.user_name }} {% if comment.user_id==blog.user_id %}(作者){% endif %}</h5>
-                        <p class="uk-comment-meta">{{ comment.created_at|datetime }}</p>
-                    </header>
-                    <div class="uk-comment-body">
-                        {{ comment.html_content|safe }}
-                    </div>
-                </article>
-            </li>
-            {% else %}
-            <p>还没有人评论...</p>
-            {% endfor %}
-        </ul>
-
+        <div id="adb-comments"></div>
+        <script>
+        new Valine({
+            el: '#adb-comments' ,
+            appId: 'yOh6osJCPwYE5iPogVER2fGn-gzGzoHsz',
+            appKey: 'Y6buYFx7Qp61y3tjqScrQwzs',
+            notify:false, 
+            verify:false, 
+            avatar:'retro',
+            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+            meta: ['nick','mail'] 
+        });
+        </script>  
     </div>
 
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 {% endblock %}
