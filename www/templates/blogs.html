@@ -7,14 +7,14 @@
 {% endblock %}
 
 {% block content %}
-    <div class="uk-grid  uk-visible@m">
-    <div class="uk-width-3-4">
+    <div class="uk-grid">
+    <div class="uk-width-expand">
     {% for blog in blogs %}
         <article class="uk-article">
-            <h3><a href="/blog/{{ blog.id }}">{{ blog.name }}</a></h3>
+            <h4><a class="uk-link-heading" href="/blog/{{ blog.id }}">{{ blog.name }}</a></h4>
             <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}</p>
             <p>{{ blog.summary }}</p>
-            <p><a href="/blog/{{ blog.id }}">继续阅读 <i class="uk-icon-angle-double-right"></i></a></p>
+            <p><a class="uk-link-muted" href="/blog/{{ blog.id }}">继续阅读 <i class="uk-icon-angle-double-right"></i></a></p>
         </article>
         <hr>
     {% endfor %}
@@ -39,27 +39,14 @@
 
             <h4>亲密链接</h4>
             <ul class="uk-list uk-list-divider">
-                    <li><a target="_blank" href="http://www.davidzyang.com/">Secret/镜像</a></li>
-                    <li><a target="_blank" href="http://lilidai-landscape.com/">Lilidai/景观</a></li>
-                    <li><a target="_blank" href="https://www.jiumodiary.com/">Reading/读书</a></li>
+                    <li><a class="uk-link-muted" target="_blank" href="http://www.davidzyang.com/">Secret/镜像</a></li>
+                    <li><a class="uk-link-muted" target="_blank" href="http://lilidai-landscape.com/">Lilidai/景观</a></li>
+                    <li><a class="uk-link-muted" target="_blank" href="https://www.jiumodiary.com/">Reading/读书</a></li>
             </ul>
 
             <h4>访问统计</h4>
             <span id="busuanzi_container_site_pv">总访问量 <span id="busuanzi_value_site_pv"></span></span>
     </div>
-    </div>
-
-    <div class="uk-hidden@m">
-    {% for blog in blogs %}
-        <article class="uk-article">
-            <h5><a href="/blog/{{ blog.id }}">{{ blog.name }}</a></h5>
-            <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}</p>
-            <p>{{ blog.summary }}</p>
-            <p><a href="/blog/{{ blog.id }}">继续阅读 <i class="uk-icon-angle-double-right"></i></a></p>
-        </article>
-        <hr>
-    {% endfor %}
-    {{ pagination(page) }}
     </div>
 
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

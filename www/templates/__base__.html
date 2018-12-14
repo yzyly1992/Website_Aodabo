@@ -32,17 +32,13 @@
     <meta name="keywords" content="aodabo,凹大卜,编程,游戏,景观,建筑,设计,虚拟现实,Landscape,Architecture,Design,AR,VR,游戏引擎,GIS,QGIS,ArcGIS,Unity,Blender,Engine,Arduino,social sensing">
     {% block meta %}<!-- block meta  -->{% endblock %}
     <title>{% block title %} ? {% endblock %}| AwesomeDavidBlog</title>
-    <link rel="stylesheet" href="/static/css/uikit.css">
-    <link rel="stylesheet" href="/static/css/uikit-rtl.css">
     <link rel="stylesheet" href="/static/css/uikit.min.css">
     <link rel="stylesheet" href="/static/css/uikit-rtl.min.css">
     <link rel="stylesheet" href="/static/css/awesome.css" />
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/sha1.min.js"></script>
-    <script src="/static/js/uikit.js"></script>
-    <script src="/static/js/uikit-icons.js"></script>
     <script src="/static/js/uikit.min.js"></script>
-    <script src="/static/js/uikit-icons.min.js"></script>
+    <script src="/static/js/icons.min.js"></script>
     <script src="/static/js/sticky.min.js"></script>
     <script src="/static/js/vue.min.js"></script>
     <script src="/static/js/awesome.js"></script>
@@ -54,12 +50,12 @@
         document.write('<script type="text/javascript" src="https://kongchenglc.github.io/lib/canvas-nest/canvas-nest.min.js"><\/script>');
     </script>
     <canvas id="c_n14" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 1;"></canvas>
-    <div class="uk-margin-medium-bottom uk-visible@m" style="background-color:rgba(100,150,185,0);">
+    <div class="uk-margin uk-visible@m" style="background-color:rgba(100,150,185,0);">
     <div class="uk-container uk-container-medium">
     <nav class="uk-navbar-container" uk-navbar style="background-color:rgba(255,255,255,0);">
         <div class="uk-navbar-left uk-margin-medium-top uk-margin-medium-bottom">
-            <a class="uk-navbar-item uk-logo uk-margin-small-right" href="/">
-                <span class="uk-icon uk-margin-left uk-margin-small-right" uk-icon="lemon4" ratio="2"></span>
+            <a class="uk-navbar-item uk-logo uk-margin-left" href="/">
+                <span class="uk-icon uk-margin-small-right" uk-icon="lemon4" ratio="2"></span>
                  凹大卜  
             </a>
             <ul class="uk-navbar-nav">
@@ -76,6 +72,7 @@
                     <a href="#0"> {{ __user__.name }}</a>
                     <div class="uk-navbar-dropdown">
                         <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li><a href="/manage/">Manage</a></li>
                             <li><a href="/signout"> Logout</a></li>
                         </ul>
                     </div>
@@ -111,6 +108,7 @@
                 <li><a href="/tags/tutorial"> Coding | 编程</a></li>
                 <li class="uk-nav-divider"></li>
                 {% if __user__ %}
+                <li><a href="/manage/">Manage | 管理</a></li>
                 <li><a href="/signout"> Logout | 注销</a></li>
                 {% else %}
                 <li><a href="/signin"> Login | 登陆</a></li>
@@ -132,34 +130,17 @@
             <!-- // content -->
     </div>
 
-    <div class="uk-margin-medium-top uk-visible@m" style="background-color:rgba(100,150,198,0)">
-        <div class="uk-container uk-container-center uk-text-center">
-            <div class="uk-margin-medium-top uk-margin-large-bottom">
-                <p>
-                    <a target="_blank" href="https://github.com/yzyly1992" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="github"></a>
-                    <a target="_blank" href="https://www.instagram.com/yzyly/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="instagram"></a>
-                    <a target="_blank" href="#" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="soundcloud"></a>
-                    <a target="_blank" href="https://www.weibo.com/208883610/" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="weibo"></a>
-                    <a target="_blank" href="https://www.linkedin.com/in/zhiyuan-yang-9204b8134/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="linkedin"></a>
-                </p>
-                <p>Powered by <a href="https://aodabo.tech">Awesome David Blog!</a> Copyright &copy; 2018. [<a href="/manage/" target="_blank">Manage</a>]</p>
-                <p><a href="https://aodabo.tech/" target="_blank">Zhiyuan Yang</a>. All rights reserved.</p>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="uk-margin-medium uk-hidden@m">
+    <div class="uk-margin-medium">
     <div class="uk-container uk-container-center uk-text-center">
         <p>
             <a target="_blank" href="https://github.com/yzyly1992" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="github"></a>
             <a target="_blank" href="https://www.instagram.com/yzyly/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="instagram"></a>
-            <a target="_blank" href="#" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="soundcloud"></a>
-            <a target="_blank" href="https://www.weibo.com/208883610/" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="weibo"></a>
+            <a target="_blank" href="https://music.163.com/#/user/home?id=41506683" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="netease"></a>
+            <a target="_blank" href="https://www.weibo.com/208883610" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="weibo"></a>
             <a target="_blank" href="https://www.linkedin.com/in/zhiyuan-yang-9204b8134/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="linkedin"></a>
         </p>
-        <p>Powered by <a href="https://aodabo.tech">AwesomeDavidBlog!</a> Copyright &copy; 2018. [<a href="/manage/" target="_blank">Manage</a>]</p>
-        <p><a href="https://aodabo.tech/" target="_blank">Zhiyuan Yang</a>. All rights reserved.</p>
+        <p class="uk-text-meta" style="line-height: 10px; padding: 10px 0; margin: 8px 0;">Powered by <a href="https://aodabo.tech">AwesomeDavidBlog!</a> Copyright &copy; 2018.</p>
+        <p class="uk-text-meta" style="line-height: 0px; padding: 0px 0; margin: 0px 0;"><a href="https://aodabo.tech/" target="_blank">Zhiyuan Yang</a>. All rights reserved.</p>
     </div>
     </div>
 

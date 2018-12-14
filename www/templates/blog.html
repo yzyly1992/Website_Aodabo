@@ -10,11 +10,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="uk-grid  uk-visible@m">
-    <div class="uk-width-3-4">
+    <div class="uk-grid">
+    <div class="uk-width-expand">
         <article class="uk-article">
-            <h2>{{ blog.name }}</h2>
+            <h3>{{ blog.name }}</h3>
             <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}
+            <span id="busuanzi_container_page_pv""> 浏览量 <span id="busuanzi_value_page_pv"></span></span>
             </p>
             <p>{{ blog.html_content|safe }}</p>
         </article>
@@ -28,7 +29,8 @@
             notify:false, 
             verify:false, 
             placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
-            meta: ['nick','mail'] 
+            meta: ['nick','mail'],
+            lang: 'en' 
         });
         </script>  
     </div>
@@ -43,31 +45,6 @@
             </div>
         </div>
     </div>
-    </div>
-
-    <div class="uk-hidden@m">
-        <article class="uk-article">
-            <h3>{{ blog.name }}</h3>
-            <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}
-            <span id="busuanzi_container_page_pv""> 浏览量 <span id="busuanzi_value_page_pv"></span></span>
-            </p>
-            <p>{{ blog.html_content|safe }}</p>
-        </article>
-
-        <hr>
-        <div id="adb-comments"></div>
-        <script>
-        new Valine({
-            el: '#adb-comments' ,
-            appId: 'yOh6osJCPwYE5iPogVER2fGn-gzGzoHsz',
-            appKey: 'Y6buYFx7Qp61y3tjqScrQwzs',
-            notify:false, 
-            verify:false, 
-            avatar:'retro',
-            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
-            meta: ['nick','mail'] 
-        });
-        </script>  
     </div>
 
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
