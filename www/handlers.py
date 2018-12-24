@@ -124,11 +124,11 @@ def get_tags(*, tag, page='1'):
         'blogs': blogs
     }
 
-@get('/register')
-def register():
-    return {
-        '__template__': 'register.html'
-    }
+##@get('/register')
+##def register():
+##    return {
+##       '__template__': 'register.html'
+##    }
 
 @get('/signin')
 def signin():
