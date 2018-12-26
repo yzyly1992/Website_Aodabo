@@ -30,3 +30,4 @@ Writing format syntax: MarkDown;
 1. Share system
 2. Pay system
 3. Safety System
+4. Author Resume
