@@ -176,6 +176,10 @@ class Model(dict, metaclass=ModelMetaclass):
             sql.append(where)
         if args is None:
             args = []
+        regexp = kw.get('regexp', None)
+        if regexp:
+            sql.append('regexp')
+            sql.append(regexp)
         orderBy = kw.get('orderBy', None)
         if orderBy:
             sql.append('order by')
@@ -196,12 +200,16 @@ class Model(dict, metaclass=ModelMetaclass):
 
     @classmethod
     @asyncio.coroutine
-    def findNumber(cls, selectField, where=None, args=None):
+    def findNumber(cls, selectField, where=None, args=None, **kw):
         ' find number by select and where. '
         sql = ['select %s _num_ from `%s`' % (selectField, cls.__table__)]
         if where:
             sql.append('where')
             sql.append(where)
+        regexp = kw.get('regexp', None)
+        if regexp:
+            sql.append('regexp')
+            sql.append(regexp)
         rs = yield from select(' '.join(sql), args, 1)
         if len(rs) == 0:
             return None

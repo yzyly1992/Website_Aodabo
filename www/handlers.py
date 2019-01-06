@@ -7,7 +7,7 @@ __author__ = 'David Yang'
 
 import re, time, json, logging, hashlib, base64, asyncio
 
-import markdown2
+import markdown
 
 from aiohttp import web
 
@@ -78,12 +78,12 @@ def cookie2user(cookie_str):
 @get('/')
 def index(*, page='1'):
     page_index = get_page_index(page)
-    num = yield from Blog.findNumber('count(id)')
+    num = yield from Blog.findNumber('count(id)', where='tag', regexp="'main'")
     p = Page(num, page_index)
     if num == 0:
         blogs = []
     else:
-        blogs = yield from Blog.findAll(orderBy='created_at desc', limit=(p.offset, p.limit))
+        blogs = yield from Blog.findAll(where='tag', regexp="'main'", orderBy='created_at desc', limit=(p.offset, p.limit))
     return {
         '__template__': 'blogs.html',
         'page': p,
@@ -101,8 +101,8 @@ def get_blog(id):
     blog = yield from Blog.find(id)
     comments = yield from Comment.findAll('blog_id=?', [id], orderBy='created_at desc')
     for c in comments:
-        c.html_content = markdown2.markdown(c.content)
-    blog.html_content = markdown2.markdown(blog.content)
+        c.html_content = markdown.markdown(c.content, extensions=['fenced_code'])
+    blog.html_content = markdown.markdown(blog.content, extensions=['fenced_code'])
     return {
         '__template__': 'blog.html',
         'blog': blog,
@@ -112,12 +112,12 @@ def get_blog(id):
 @get('/tags/{tag}')
 def get_tags(*, tag, page='1'):
     page_index = get_page_index(page)
-    num = yield from Blog.findNumber('count(id)', 'tag=?', [tag])
+    num = yield from Blog.findNumber('count(id)', where='tag', regexp=''.join(("'", tag, "'")))
     p = Page(num, page_index)
     if num == 0:
         blogs = []
     else:
-        blogs = yield from Blog.findAll('tag=?', [tag], orderBy='created_at desc', limit=(p.offset, p.limit))
+        blogs = yield from Blog.findAll(where='tag', regexp=''.join(("'", tag, "'")), orderBy='created_at desc', limit=(p.offset, p.limit))
     return {
         '__template__': 'blogs.html',
         'page': p,
@@ -294,11 +294,11 @@ def api_blogs(*, page='1'):
 @get('/api/tags/{tag}')
 def api_blogs_tag(*, tag, page='1'):
     page_index = get_page_index(page)
-    num = yield from Blog.findNumber('count(id)', 'tag=?', [tag])
+    num = yield from Blog.findNumber('count(id)', where='tag', regexp=''.join(("'", tag, "'")))
     p = Page(num, page_index)
     if num == 0:
         return dict(page=p, blogs=())
-    blogs = yield from Blog.findAll('tag=?', [tag], orderBy='created_at desc', limit=(p.offset, p.limit))
+    blogs = yield from Blog.findAll(where='tag', regexp=''.join(("'", tag, "'")), orderBy='created_at desc', limit=(p.offset, p.limit))
     return dict(page=p, blogs=blogs)
 
 @get('/api/blogs/{id}')

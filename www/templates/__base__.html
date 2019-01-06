@@ -7,7 +7,13 @@
         {% else %}
             <li class="uk-disabled"><a href="#"><span uk-pagination-previous></span></a></li>
         {% endif %}
+        {% for i in range(1,page.page_count+1) %}
+        {% if i==page.page_index %}
             <li class="uk-active"><span>{{ page.page_index }}</span></li>
+        {% else %}
+            <li><a href="?page={{ i }}"><span>{{ i }}</span></a></li>
+        {% endif %}
+        {% endfor %}
         {% if page.has_next %}
             <li><a href="?page={{ page.page_index + 1 }}"><span uk-pagination-next></span></a></li>
         {% else %}
@@ -102,7 +108,7 @@
                 <li><a href="/"> Article | 日志</a></li>
                 <li><a href="/tags/tutorial"> Tutorial | 教程</a></li>
                 <li><a href="/tags/landscape"> Landscape | 景观</a></li>
-                <li><a href="/tags/tutorial"> Coding | 编程</a></li>
+                <li><a href="/tags/coding"> Coding | 编程</a></li>
                 {% if __user__ %}
                 <li class="uk-nav-divider"></li>
                 <li><a href="/manage/">Manage | 管理</a></li>
