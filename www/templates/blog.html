@@ -14,8 +14,8 @@
     <div class="uk-width-expand">
         <article class="uk-article">
             <h3>{{ blog.name }}</h3>
-            <p class="uk-article-meta">发表于{{ blog.created_at|datetime }}
-            <span id="busuanzi_container_page_pv""> 浏览量 <span id="busuanzi_value_page_pv"></span></span>
+            <p class="uk-article-meta">Posted{{ blog.created_at|datetime }}
+            <span id="busuanzi_container_page_pv" class="uk-margin-small-left">Views <span id="busuanzi_value_page_pv"></span></span>
             </p>
             <p>{{ blog.html_content|safe }}</p>
         </article>
@@ -26,10 +26,11 @@
             el: '#adb-comments' ,
             appId: 'yOh6osJCPwYE5iPogVER2fGn-gzGzoHsz',
             appKey: 'Y6buYFx7Qp61y3tjqScrQwzs',
-            notify:false, 
-            verify:false, 
-            placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+            notify:true, 
+            verify:true, 
+            placeholder: 'Shot your comment! (๑ÒωÓ๑)',
             meta: ['nick','mail'],
+            avatar:'retro',
             lang: 'en' 
         });
         </script>  
@@ -40,7 +41,7 @@
         <div class="uk-text-center">
             <img class="uk-border-circle" width="120" height="120" src="{{ blog.user_image }}">
             <h5>    </h5>
-            <li><a class="uk-link-muted" target="_blank" href="https://aodabo.tech">Aodabo | 杨志远</a></li>
+            <li><a class="uk-link-muted" target="_blank" href="https://aodabo.tech/blog/00154705114712872bf1af8897f4171813cdfe5fd956858000">Aodabo | 杨志远</a></li>
             <h5>    </h5>
             <h5>    </h5>
         </div>

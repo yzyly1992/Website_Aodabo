@@ -101,8 +101,8 @@ def get_blog(id):
     blog = yield from Blog.find(id)
     comments = yield from Comment.findAll('blog_id=?', [id], orderBy='created_at desc')
     for c in comments:
-        c.html_content = markdown.markdown(c.content, extensions=['fenced_code'])
-    blog.html_content = markdown.markdown(blog.content, extensions=['fenced_code'])
+        c.html_content = markdown.markdown(c.content, extensions=['codehilite','fenced_code'])
+    blog.html_content = markdown.markdown(blog.content, extensions=['codehilite','fenced_code'])
     return {
         '__template__': 'blog.html',
         'blog': blog,
