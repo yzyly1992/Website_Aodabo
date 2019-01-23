@@ -48,7 +48,8 @@ $(function () {
             name: '',
             summary: '',
             content: '',
-            tag: ''
+            tag: '',
+            bg: ''
         });
     }
 });
@@ -99,6 +100,12 @@ $(function () {
                 <label class="uk-form-label">标签:</label>
                 <div class="uk-form-controls">
                     <input v-model="tag" name="tag" type="text" placeholder="标签" class="uk-input uk-form-width-large">
+                </div>
+            </div>
+            <div class="uk-margin-top">
+                <label class="uk-form-label">背景:</label>
+                <div class="uk-form-controls">
+                    <input v-model="bg" name="bg" type="text" placeholder="背景" class="uk-input uk-form-width-large">
                 </div>
             </div>
             <div class="uk-margin-top">

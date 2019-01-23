@@ -3,26 +3,26 @@
 {% macro pagination(page) %}
     <ul class="uk-pagination uk-flex-center uk-margin-medium-top uk-margin-large-bottom">
         {% if page.has_previous %}
-            <li><a href="?page={{ page.page_index - 1 }}"><span uk-pagination-previous></span></a></li>
+            <li><a aria-label="Previous_A" href="?page={{ page.page_index - 1 }}"><span uk-pagination-previous></span></a></li>
         {% else %}
-            <li class="uk-disabled"><a href="#"><span uk-pagination-previous></span></a></li>
+            <li class="uk-disabled"><a aria-label="Previous_B" href="#"><span uk-pagination-previous></span></a></li>
         {% endif %}
         {% for i in range(1,page.page_count+1) %}
         {% if i==page.page_index %}
             <li class="uk-active"><span>{{ page.page_index }}</span></li>
         {% else %}
-            <li><a href="?page={{ i }}"><span>{{ i }}</span></a></li>
+            <li><a aria-label="Page" href="?page={{ i }}"><span>{{ i }}</span></a></li>
         {% endif %}
         {% endfor %}
         {% if page.has_next %}
-            <li><a href="?page={{ page.page_index + 1 }}"><span uk-pagination-next></span></a></li>
+            <li><a aria-label="Next_A" href="?page={{ page.page_index + 1 }}"><span uk-pagination-next></span></a></li>
         {% else %}
-            <li class="uk-disabled"><a href="#"><span uk-pagination-next></span></a></li>
+            <li class="uk-disabled"><a aria-label="Next_B" href="#"><span uk-pagination-next></span></a></li>
         {% endif %}
     </ul>
 {% endmacro %}
 
-<html>
+<html lang="zh">
 <head>
     <meta name="google-site-verification" content="eKqBMmzuBuRLUDW-_3A2z6tWCufHqpueCwcCttltZI4" />
     <meta name="baidu-site-verification" content="rAg9A4zDFw" />
@@ -32,20 +32,30 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width,initial-scale=0.9,minimum-scale=0.9,maximum-scale=0.9,user-scalable=no">
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-title" content="Aodabo">
+    <link rel="apple-touch-icon" href="/static/img/icon-512.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Windows -->
+    <meta name="msapplication-TileImage" content="/static/img/icon-512.png">
+    <meta name="msapplication-TileColor" content="#FEFEFE">
+    <meta name="theme-color" content="#FEFEFE">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=5.0">
     <meta name="wap-font-scale" content="no">
-    <meta name="description" content="An original blog website dedicated to sharing interesting concept, skill, technology, design and practice.   一个致力于分享各种有趣概念,技术,设计,及实践的个人原创博客.">
+    <meta name="description" content="[Awesome David Blog] dedicated to sharing interesting concept,technology, design and practice. [凹大卜]致力于分享有趣概念,技术,设计,及实践...">
     <meta name="keywords" content="aodabo,凹大卜,编程,游戏,景观,建筑,设计,网站,前端,建站,教程,虚拟现实,Landscape,Architecture,Design,AR,VR,游戏引擎,GIS,QGIS,ArcGIS,Unity,Blender,Engine,Arduino,Python,Website,Project">
     {% block meta %}<!-- block meta  -->{% endblock %}
-    <title>{% block title %} ? {% endblock %}| AwesomeDavidBlog</title>
+    <title>{% block title %} ? {% endblock %}| AWESOME DAVID BLOG</title>
     <link rel="stylesheet" href="/static/css/uikit.min.css">
-    <link rel="stylesheet" href="/static/css/uikit-rtl.min.css">
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="stylesheet" href="/static/css/awesome.css" />
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/sha1.min.js"></script>
     <script src="/static/js/uikit.min.js"></script>
-    <script src="/static/js/icons.min.js"></script>
+    <script src="/static/js/uikit-icons.min.js"></script>
     <script src="/static/js/sticky.min.js"></script>
     <script src="/static/js/vue.min.js"></script>
     <script src="/static/js/awesome.js"></script>
@@ -54,22 +64,22 @@
 <body>
     <script type="text/javascript">
         if (screen.width>960)
-        document.write('<script type="text/javascript" src="https://kongchenglc.github.io/lib/canvas-nest/canvas-nest.min.js"><\/script>');
+        var loaderTag = document.createElement('script');loaderTag.type='text/javascript';loaderTag.src='/static/js/canvas-nest.min.js';document.getElementsByTagName('head')[0].appendChild(loaderTag);
     </script>
     <canvas id="c_n14" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 1;"></canvas>
-    <div class="uk-margin uk-visible@m" style="background-color:rgba(100,150,185,0);">
+    <div class="uk-margin-top uk-margin-bottom uk-visible@s" style="background-color:rgba(100,150,185,0);">
     <div class="uk-container uk-container-medium">
     <nav class="uk-navbar-container" uk-navbar style="background-color:rgba(255,255,255,0);">
         <div class="uk-navbar-left uk-margin-medium-top uk-margin-medium-bottom">
-            <a class="uk-navbar-item uk-logo uk-margin-left" href="/">
-                <span class="uk-icon uk-margin-small-right" uk-icon="lemon4" ratio="2"></span>
+            <a class="uk-navbar-item uk-logo uk-padding-remove-left" href="/">
+                <span class="uk-icon uk-margin-small-right uk-padding-remove-left" uk-icon="lemon4" ratio="2"></span>
                  凹大卜  
             </a>
             <ul class="uk-navbar-nav">
                 <li><a href="/"> Article | 日志</a></li>
+                <li><a href="/landscape"> Landscape | 景观</a></li>
+                <li><a href="/tags/coding"> Programming | 编程</a></li>
                 <li><a href="/tags/tutorial"> Tutorial | 教程</a></li>
-                <li><a href="/tags/landscape"> Landscape | 景观</a></li>
-                <li><a href="/tags/coding"> Coding | 编程</a></li>
             </ul>
         </div>
         <div class="uk-navbar-right uk-margin-medium-top uk-margin-medium-bottom">
@@ -91,7 +101,7 @@
     </div>
     </div>
 
-    <nav class="uk-navbar-container uk-margin-medium uk-hidden@m" uk-navbar style="background-color:rgba(255,255,255,0);">
+    <nav class="uk-navbar-container uk-margin-bottom uk-hidden@s" uk-navbar style="background-color:rgba(255,255,255,1);" uk-sticky="bottom: #offset">
         <div class="uk-navbar-left">
             <a class="uk-navbar-item uk-logo" href="/">
                 <span class="uk-icon uk-margin-small-right" uk-icon="lemon4" ratio="2"></span>
@@ -101,15 +111,15 @@
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
             <li>
-            <a class="uk-navbar-toggle" uk-toggle="target: #offcanvas-nav" uk-navbar-toggle-icon></a>
+            <a class="uk-navbar-toggle" uk-toggle="target: #offcanvas-slide" uk-navbar-toggle-icon></a>
 
-            <div id="offcanvas-nav" uk-offcanvas="overlay: true; flip: true">
+            <div id="offcanvas-slide" uk-offcanvas="overlay: true">
             <div class="uk-offcanvas-bar uk-flex uk-flex-column">
             <ul class="uk-nav uk-nav-default uk-margin-auto-vertical">
                 <li><a href="/"> Article | 日志</a></li>
+                <li><a href="/landscape"> Landscape | 景观</a></li>
+                <li><a href="/tags/coding"> Programming | 编程</a></li>
                 <li><a href="/tags/tutorial"> Tutorial | 教程</a></li>
-                <li><a href="/tags/landscape"> Landscape | 景观</a></li>
-                <li><a href="/tags/coding"> Coding | 编程</a></li>
                 {% if __user__ %}
                 <li class="uk-nav-divider"></li>
                 <li><a href="/manage/">Manage | 管理</a></li>
@@ -134,16 +144,27 @@
     <div class="uk-margin-medium">
     <div class="uk-container uk-container-center uk-text-center">
         <p>
-            <a target="_blank" href="https://github.com/yzyly1992" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="github"></a>
-            <a target="_blank" href="https://www.instagram.com/yzyly/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="instagram"></a>
-            <a target="_blank" href="https://music.163.com/#/user/home?id=41506683" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="netease"></a>
-            <a target="_blank" href="https://www.weibo.com/208883610" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="weibo"></a>
-            <a target="_blank" href="https://www.linkedin.com/in/zhiyuan-yang-9204b8134/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="linkedin"></a>
+            <a rel="noopener" target="_blank" aria-label="Github" href="https://github.com/yzyly1992" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="github"></a>
+            <a rel="noopener" target="_blank" aria-label="Instagram" href="https://www.instagram.com/yzyly/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="instagram"></a>
+            <a rel="noopener" target="_blank" aria-label="Netease" href="https://music.163.com/#/user/home?id=41506683" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="netease"></a>
+            <a rel="noopener" target="_blank" aria-label="Weibo" href="https://www.weibo.com/208883610" class="uk-icon-button uk-margin-small-right" ratio="1.2" uk-icon="weibo"></a>
+            <a rel="noopener" target="_blank" aria-label="Linkedin" href="https://www.linkedin.com/in/zhiyuan-yang-9204b8134/" class="uk-icon-button uk-margin-small-right" ratio="1.1" uk-icon="linkedin"></a>
         </p>
-        <p class="uk-text-meta" style="line-height: 10px; padding: 10px 0; margin: 8px 0;">Powered by <a href="https://aodabo.tech">AwesomeDavidBlog!</a> Copyright &copy; 2019.</p>
+        <p class="uk-text-meta" style="line-height: 10px; padding: 10px 0; margin: 8px 0;">Powered by <a href="https://aodabo.tech">Aodabo</a> Copyright &copy; 2019.</p>
         <p class="uk-text-meta" style="line-height: 0px; padding: 0px 0; margin: 0px 0;"><a href="https://aodabo.tech/" target="_blank">Zhiyuan Yang</a>. All rights reserved.</p>
     </div>
     </div>
 
 </body>
+<script>
+
+  if ('serviceWorker' in navigator) 
+  {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js')
+    .then(function() { console.log("Service Worker Registered, Cheers to PWA Fire!"); });
+  }
+  );
+}  
+</script> 
 </html>

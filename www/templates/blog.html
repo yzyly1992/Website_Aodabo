@@ -4,9 +4,6 @@
 
 {% block beforehead %}
 
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
-    
 {% endblock %}
 
 {% block content %}
@@ -20,26 +17,31 @@
             <p>{{ blog.html_content|safe }}</p>
         </article>
         <hr>
+
+        <script src='/static/js/av-min.js'></script>
+        <script src='/static/js/valine.min.js'></script>
         <div id="adb-comments"></div>
         <script>
         new Valine({
             el: '#adb-comments' ,
             appId: 'yOh6osJCPwYE5iPogVER2fGn-gzGzoHsz',
             appKey: 'Y6buYFx7Qp61y3tjqScrQwzs',
-            notify:true, 
-            verify:true, 
+            notify: false, 
+            verify: false, 
             placeholder: 'Shot your comment! (๑ÒωÓ๑)',
             meta: ['nick','mail'],
             avatar:'retro',
             lang: 'en' 
         });
         </script>  
+
     </div>
+
 
     <div class="uk-width-1-4 uk-visible@m">
 
         <div class="uk-text-center">
-            <img class="uk-border-circle" width="120" height="120" src="{{ blog.user_image }}">
+            <img class="uk-border-circle" width="120" height="120" src="https://www.gravatar.com/avatar/f73911268c7b1cfa458988828ed89d80?d=mm&s=120">
             <h5>    </h5>
             <li><a class="uk-link-muted" target="_blank" href="https://aodabo.tech/blog/00154705114712872bf1af8897f4171813cdfe5fd956858000">Aodabo | 杨志远</a></li>
             <h5>    </h5>
@@ -47,18 +49,27 @@
         </div>
 
         <h4>分类标签</h4>
-            <ul class="uk-list">
-                    <li><a class="uk-link-muted" target="_blank" href="/tags/web">Python Web Dev(20)</a></li>
-                    <li><a class="uk-link-muted" target="_blank" href="/tags/arduino">Arduino Projects(6)</a></li>
-                    <li><a class="uk-link-muted" target="_blank" href="/tags/unity">Unity3D Projects(5)</a></li>
-                    <li><a class="uk-link-muted" target="_blank" href="/tags/landscape">Landscape Projects(8)</a></li>
-            </ul>
+            <p uk-margin>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/web">Python</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/web">Web</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/arduino">Arduino</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/unity">Unity3D</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/unity">Game Dev</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/led">LED</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/arvr">AR+VR</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/gis">GIS</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/landscape">Landscape</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/modeling">3D Modeling</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/photo">Photography</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/landscape">Design</a>
+                <a class="uk-button uk-button-default uk-button-small" target="_blank" href="/tags/sound">Sound</a>
+            </p>
 
         <h4>亲密链接</h4>
             <ul class="uk-list">
-                    <li><a class="uk-link-muted" target="_blank" href="http://www.davidzyang.com/">Secret | 镜像</a></li>
-                    <li><a class="uk-link-muted" target="_blank" href="http://lilidai-landscape.com/">Lilidai | 一半</a></li>
-                    <li><a class="uk-link-muted" target="_blank" href="https://www.jiumodiary.com/">Reading | 书源</a></li>
+                    <li><a rel="noopener" class="uk-link-muted" target="_blank" href="http://www.davidzyang.com/">Secret | 镜像</a></li>
+                    <li><a rel="noopener" class="uk-link-muted" target="_blank" href="http://lilidai-landscape.com/">Lilidai | 一半</a></li>
+                    <li><a rel="noopener" class="uk-link-muted" target="_blank" href="https://www.jiumodiary.com/">Reading | 书源</a></li>
             </ul>
 
     </div>

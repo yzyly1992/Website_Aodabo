@@ -1,15 +1,7 @@
-server {
-    # 监听80端口，作用是将用户http的请求转发到https
-    listen      80;
-    # 绑定的域名
-    server_name aodabo.tech www.aodabo.tech;
-    rewrite ^(.*)$  https://aodabo.tech permanent;
-}
 
 server {
-    listen 443;
+    listen 443 ssl http2;
     server_name aodabo.tech www.aodabo.tech;
-    ssl on;
     ssl_certificate   /etc/nginx/cert/1541060403472.pem;
     ssl_certificate_key  /etc/nginx/cert/1541060403472.key;
     ssl_session_timeout 5m;
@@ -22,14 +14,32 @@ server {
 
     client_max_body_size 1m;
 
-    gzip            on;
-    gzip_min_length 1024;
-    gzip_buffers    4 8k;
-    gzip_types      text/css application/x-javascript application/json;
+    gzip on;
+    gzip_disable "msie6";
+
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_comp_level 6;
+    gzip_buffers 16 8k;
+    gzip_http_version 1.1;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
 
     sendfile on;
 
+    location ~* \.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$ {
+        add_header Cache-Control "public, max-age=31536000, immutable";
+    }
+
     location /favicon.ico {
+        root /srv/awesome/www;
+	add_header 'Service-Worker-Allowed' '/';
+    }
+
+    location /manifest.json {
+        root /srv/awesome/www;
+    }
+
+    location /sw.js {
         root /srv/awesome/www;
     }
 
@@ -46,6 +56,13 @@ server {
 
 }
 
+server {
+    # 监听80端口，作用是将用户http的请求转发到https
+    listen      80;
+    # 绑定的域名
+    server_name aodabo.tech www.aodabo.tech;
+    rewrite ^(.*)$  https://aodabo.tech permanent;
+}
 
 server {
     listen 80;

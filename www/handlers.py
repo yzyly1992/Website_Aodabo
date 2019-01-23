@@ -101,8 +101,8 @@ def get_blog(id):
     blog = yield from Blog.find(id)
     comments = yield from Comment.findAll('blog_id=?', [id], orderBy='created_at desc')
     for c in comments:
-        c.html_content = markdown.markdown(c.content, extensions=['codehilite','fenced_code'])
-    blog.html_content = markdown.markdown(blog.content, extensions=['codehilite','fenced_code'])
+        c.html_content = markdown.markdown(c.content, extensions=['codehilite','fenced_code','tables','footnotes'])
+    blog.html_content = markdown.markdown(blog.content, extensions=['codehilite','fenced_code','tables','footnotes'])
     return {
         '__template__': 'blog.html',
         'blog': blog,
@@ -120,6 +120,21 @@ def get_tags(*, tag, page='1'):
         blogs = yield from Blog.findAll(where='tag', regexp=''.join(("'", tag, "'")), orderBy='created_at desc', limit=(p.offset, p.limit))
     return {
         '__template__': 'blogs.html',
+        'page': p,
+        'blogs': blogs
+    }
+
+@get('/landscape')
+def get_landscape(*, page='1'):
+    page_index = get_page_index(page)
+    num = yield from Blog.findNumber('count(id)', where='tag', regexp="'landscape'")
+    p = Page(num, page_index)
+    if num == 0:
+        blogs = []
+    else:
+        blogs = yield from Blog.findAll(where='tag', regexp="'landscape'", orderBy='created_at desc', limit=(p.offset, p.limit))
+    return {
+        '__template__': 'blogs_sq.html',
         'page': p,
         'blogs': blogs
     }
@@ -171,7 +186,7 @@ def signout(request):
 
 @get('/manage/')
 def manage():
-    return 'redirect:/manage/comments'
+    return 'redirect:/manage/blogs'
 
 @get('/manage/comments')
 def manage_comments(*, page='1'):
@@ -301,13 +316,23 @@ def api_blogs_tag(*, tag, page='1'):
     blogs = yield from Blog.findAll(where='tag', regexp=''.join(("'", tag, "'")), orderBy='created_at desc', limit=(p.offset, p.limit))
     return dict(page=p, blogs=blogs)
 
+@get('/api/landscape')
+def api_landscape(*, page='1'):
+    page_index = get_page_index(page)
+    num = yield from Blog.findNumber('count(id)', where='tag', regexp="'landscape'")
+    p = Page(num, page_index)
+    if num == 0:
+        return dict(page=p, blogs=())
+    blogs = yield from Blog.findAll(where='tag', regexp="'landscape'", orderBy='created_at desc', limit=(p.offset, p.limit))
+    return dict(page=p, blogs=blogs)
+
 @get('/api/blogs/{id}')
 def api_get_blog(*, id):
     blog = yield from Blog.find(id)
     return blog
 
 @post('/api/blogs')
-def api_create_blog(request, *, name, summary, content, tag):
+def api_create_blog(request, *, name, summary, content, tag, bg):
     check_admin(request)
     if not name or not name.strip():
         raise APIValueError('name', 'name cannot be empty.')
@@ -317,12 +342,12 @@ def api_create_blog(request, *, name, summary, content, tag):
         raise APIValueError('content', 'content cannot be empty.')
     if not tag or not tag.strip():
         raise APIValueError('tag', 'tag cannot be empty.')
-    blog = Blog(user_id=request.__user__.id, user_name=request.__user__.name, user_image=request.__user__.image, name=name.strip(), summary=summary.strip(), content=content.strip(), tag=tag.strip())
+    blog = Blog(user_id=request.__user__.id, user_name=request.__user__.name, user_image=request.__user__.image, name=name.strip(), summary=summary.strip(), content=content.strip(), tag=tag.strip(), bg=bg.strip())
     yield from blog.save()
     return blog
 
 @post('/api/blogs/{id}')
-def api_update_blog(id, request, *, name, summary, content, tag):
+def api_update_blog(id, request, *, name, summary, content, tag, bg):
     check_admin(request)
     blog = yield from Blog.find(id)
     if not name or not name.strip():
@@ -337,6 +362,7 @@ def api_update_blog(id, request, *, name, summary, content, tag):
     blog.summary = summary.strip()
     blog.content = content.strip()
     blog.tag = tag.strip()
+    blog.bg = bg.strip()
     yield from blog.update()
     return blog
 
