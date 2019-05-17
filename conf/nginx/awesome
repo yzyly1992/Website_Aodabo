@@ -27,7 +27,7 @@ server {
     sendfile on;
 
     location ~* \.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$ {
-        add_header Cache-Control "public, max-age=31536000, immutable";
+        add_header Cache-Control "no-cache";
     }
 
     location /favicon.ico {

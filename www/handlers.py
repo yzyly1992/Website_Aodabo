@@ -96,6 +96,18 @@ def sitemap():
         '__template__': 'sitemap.txt'
     }
 
+@get('/loop/index')
+def loop_index():
+    return {
+        '__template__': 'loop_index.html'
+    }
+
+@get('/loop/about')
+def loop_about():
+    return {
+        '__template__': 'loop_about.html'
+    }
+
 @get('/blog/{id}')
 def get_blog(id):
     blog = yield from Blog.find(id)

@@ -32,7 +32,7 @@ console.log("fetch completed: " + event.request.url, networkResponse);
         );
         });
 // respond from the cache, or the network
-  return response || fetchPromise;
+  return fetchPromise || response;
 });
 }));
 });

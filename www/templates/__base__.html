@@ -47,6 +47,7 @@
     <meta name="wap-font-scale" content="no">
     <meta name="description" content="[Awesome David Blog] dedicated to sharing interesting concept,technology, design and practice. [凹大卜]致力于分享有趣概念,技术,设计,及实践...">
     <meta name="keywords" content="aodabo,凹大卜,编程,游戏,景观,建筑,设计,网站,前端,建站,教程,虚拟现实,Landscape,Architecture,Design,AR,VR,游戏引擎,GIS,QGIS,ArcGIS,Unity,Blender,Engine,Arduino,Python,Website,Project">
+    <meta http-equiv="imagetoolbar" content="false">
     {% block meta %}<!-- block meta  -->{% endblock %}
     <title>{% block title %} ? {% endblock %}| AWESOME DAVID BLOG</title>
     <link rel="stylesheet" href="/static/css/uikit.min.css">
@@ -61,13 +62,13 @@
     <script src="/static/js/awesome.js"></script>
     {% block beforehead %}<!-- before head  -->{% endblock %}
 </head>
-<body>
+<body ondragstart='return false'>
     <script type="text/javascript">
         if (screen.width>960)
         var loaderTag = document.createElement('script');loaderTag.type='text/javascript';loaderTag.src='/static/js/canvas-nest.min.js';document.getElementsByTagName('head')[0].appendChild(loaderTag);
     </script>
     <canvas id="c_n14" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 1;"></canvas>
-    <div class="uk-margin-top uk-margin-bottom uk-visible@s" style="background-color:rgba(100,150,185,0);">
+    <div class="uk-margin-top uk-margin-bottom uk-visible@m" style="background-color:rgba(100,150,185,0);">
     <div class="uk-container uk-container-medium">
     <nav class="uk-navbar-container" uk-navbar style="background-color:rgba(255,255,255,0);">
         <div class="uk-navbar-left uk-margin-medium-top uk-margin-medium-bottom">
@@ -101,7 +102,7 @@
     </div>
     </div>
 
-    <nav class="uk-navbar-container uk-margin-bottom uk-hidden@s" uk-navbar style="background-color:rgba(255,255,255,1);" uk-sticky="bottom: #offset">
+    <nav class="uk-navbar-container uk-margin-bottom uk-hidden@m" uk-navbar style="background-color:rgba(255,255,255,1.0);" uk-sticky="bottom: #offset">
         <div class="uk-navbar-left">
             <a class="uk-navbar-item uk-logo" href="/">
                 <span class="uk-icon uk-margin-small-right" uk-icon="lemon4" ratio="2"></span>

@@ -11,12 +11,12 @@
 	<div class="uk-child-width-1-1" uk-grid>
     {% for blog in blogs %}
     <div>
-    	<div class="uk-inline">
+    	<div class="uk-inline uk-card uk-card-default">
         <div class="uk-height-large uk-background-cover uk-overflow-hidden uk-flex uk-flex-top" style="background-image: url('{{ blog.bg }}');">
-        <div class="uk-overlay-primary uk-position-cover" uk-parallax="opacity: 0,1,1"></div>
-    		<div class="uk-width-1-2@m uk-text-center uk-margin uk-margin-auto uk-margin-auto-vertical uk-overlay uk-light">
-        		<h2 uk-parallax="opacity: 0,0.9,1; y: -50,-5,0; scale: 1.5,1.1,1; viewport: 0.2"><a class="uk-link-heading" href="/blog/{{ blog.id }}">{{ blog.name }}</a></h2>
-        		<p uk-parallax="opacity: 0,0.9,1; y: 50,5,0; scale: 0.7,0.9,1; viewport: 0.2"><a href="/blog/{{ blog.id }}">{{ blog.summary }}</a></p>
+        <div class="uk-overlay-primary uk-position-cover" uk-parallax="opacity: 0,1,1; viewport: 0.7"></div>
+    		<div class="uk-width-1-2@s uk-text-center uk-margin uk-margin-auto uk-margin-auto-vertical uk-overlay uk-light">
+        		<h4 uk-parallax="opacity: 0,1,1; y: -50,-5,0; scale: 1.5,1.1,1; viewport: 0.2"><a class="uk-link-heading" href="/blog/{{ blog.id }}">{{ blog.name }}</a></h2>
+        		<p uk-parallax="opacity: 0,1,1; y: 50,5,0; scale: 0.7,0.9,1; viewport: 0.2"><a href="/blog/{{ blog.id }}">{{ blog.summary }}</a></p>
     		</div>
 		</div>
 		</div>
