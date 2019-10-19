@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # fabfile.py
 import os, re
 from datetime import datetime
@@ -11,8 +14,8 @@ from fabric.api import *
 # sudo用户为root:
 # env.sudo_user = 'ubuntu'
 # 服务器地址，可以有多个，依次部署:
-env.hosts = ['ubuntu@ec2-18-216-164-106.us-east-2.compute.amazonaws.com']
-env.key_filename = '/Users/davidyang/Documents/Keys/awsKeyPair.pem'
+env.hosts = ['ec2-user@ec2-3-15-64-26.us-east-2.compute.amazonaws.com']
+env.key_filename = '/Users/davidyang/Documents/Keys/pangpang_network_key.pem'
 # env.ssh_config_path = '~/.ssh/config'
 # env.use_ssh_config = True
 
@@ -32,7 +35,7 @@ def touchfile():                         # 随便创建一个任务，用来测�
 def deploy():
     newdir = 'www-%s' % datetime.now().strftime('%y-%m-%d_%H.%M.%S')
     # 删除已有的tar文件:
-    run('rm -f %s' % _REMOTE_TMP_TAR)
+    sudo('rm -f %s' % _REMOTE_TMP_TAR)
     # 上传新的tar文件:
     put('dist/%s' % _TAR_FILE, _REMOTE_TMP_TAR)
     # 创建新目录:
@@ -50,13 +53,12 @@ def deploy():
     with cd(_REMOTE_BASE_DIR):
         sudo('rm -rf www')
         sudo('ln -s %s www' % newdir)
-        sudo('chown ubuntu:ubuntu www')
-        sudo('chown -R ubuntu:ubuntu %s' % newdir)
+        sudo('chown ec2-user:ec2-user www')
+        sudo('chown -R ec2-user:ec2-user %s' % newdir)
     # 重启Python服务和nginx服务器:
     with settings(warn_only=True):
-        sudo('supervisorctl stop awesome')
-        sudo('supervisorctl start awesome')
-        sudo('/etc/init.d/nginx reload')
+        sudo('supervisorctl restart awesome')
+        sudo('service nginx reload')
 
 
 def build():
