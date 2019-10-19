@@ -1,0 +1,3 @@
+After Restart The Server:
+sudo /bin/supervisord
+sudo nginx -c /etc/nginx/nginx.conf
