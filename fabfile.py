@@ -11,10 +11,7 @@ from fabric import task
 # 建立Connection到server:
 c = Connection(
     host="ec2-3-15-64-26.us-east-2.compute.amazonaws.com",
-    user="ec2-user",
-    connect_kwargs={
-        "key_filename": "/Users/davidyang/Documents/Keys/pangpang_network_key.pem",
-    },
+    user="ec2-user"
 )
 
 _TAR_FILE = 'dist-awesome.tar.gz'
