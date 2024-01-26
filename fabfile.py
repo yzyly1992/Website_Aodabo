@@ -10,8 +10,8 @@ from fabric import task
 
 # 建立Connection到server:
 c = Connection(
-    host="ec2-3-15-64-26.us-east-2.compute.amazonaws.com",
-    user="ec2-user"
+    host="root@23.94.74.246",
+    connect_kwargs={"password":"ju51eP60bf3J1WdJKE"}
 )
 
 _TAR_FILE = 'dist-awesome.tar.gz'
@@ -27,14 +27,14 @@ def deploy(conn):
     # 上传新的tar文件:
     c.put('dist/%s' % _TAR_FILE, _REMOTE_TMP_TAR)
     # 创建新目录:
-    c.sudo('bash -c "cd %s && mkdir %s"' % (_REMOTE_BASE_DIR, newdir))
+    c.run('bash -c "cd %s && mkdir %s"' % (_REMOTE_BASE_DIR, newdir))
     # 解压到新目录, 添加浏览权限:
-    c.sudo('bash -c "cd %s/%s && tar -xzvf %s && chmod -R 775 static/ && chmod 775 favicon.ico"' % (_REMOTE_BASE_DIR, newdir, _REMOTE_TMP_TAR))
+    c.run('bash -c "cd %s/%s && tar -xzvf %s && chmod -R 775 static/ && chmod 775 favicon.ico"' % (_REMOTE_BASE_DIR, newdir, _REMOTE_TMP_TAR))
     # 重置软链接:
-    c.sudo('bash -c "cd %s && rm -rf www && ln -s %s www && chown ec2-user:ec2-user www && chown -R ec2-user:ec2-user %s"' % (_REMOTE_BASE_DIR, newdir, newdir))
+    c.run('bash -c "cd %s && rm -rf www && ln -s %s www && chown david:david www && chown -R david:david %s"' % (_REMOTE_BASE_DIR, newdir, newdir))
     # 重启Python服务和nginx服务器:
-    c.sudo('supervisorctl restart awesome', warn=True)
-    c.sudo('nginx -s reload', warn=True)
+    c.run('supervisorctl restart awesome', warn=True)
+    c.run('nginx -s reload', warn=True)
 
 # 打包本地文件
 @task
