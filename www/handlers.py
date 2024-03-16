@@ -95,17 +95,35 @@ def sitemap():
         '__template__': 'sitemap.txt'
     }
 
-@get('/loop/index')
-def loop_index():
+@get('/ads.txt')
+def ads():
     return {
-        '__template__': 'loop_index.html'
+        '__template__': 'ads.txt'
     }
 
-@get('/loop/about')
-def loop_about():
+@get('/privacy')
+def privacy():
     return {
-        '__template__': 'loop_about.html'
+        '__template__': 'privacy.html'
     }
+
+@get('/terms')
+def terms():
+    return {
+        '__template__': 'terms.html'
+    }
+
+# @get('/loop/index')
+# def loop_index():
+#     return {
+#         '__template__': 'loop_index.html'
+#     }
+
+# @get('/loop/about')
+# def loop_about():
+#     return {
+#         '__template__': 'loop_about.html'
+#     }
 
 @get('/blog/{id}')
 async def get_blog(id):
@@ -135,20 +153,20 @@ async def get_tags(*, tag, page='1'):
         'blogs': blogs
     }
 
-@get('/landscape')
-async def get_landscape(*, page='1'):
-    page_index = get_page_index(page)
-    num = await Blog.findNumber('count(id)', where='tag', regexp="'landscape'")
-    p = Page(num, page_index)
-    if num == 0:
-        blogs = []
-    else:
-        blogs = await Blog.findAll(where='tag', regexp="'landscape'", orderBy='created_at desc', limit=(p.offset, p.limit))
-    return {
-        '__template__': 'blogs_sq.html',
-        'page': p,
-        'blogs': blogs
-    }
+# @get('/landscape')
+# async def get_landscape(*, page='1'):
+#     page_index = get_page_index(page)
+#     num = await Blog.findNumber('count(id)', where='tag', regexp="'landscape'")
+#     p = Page(num, page_index)
+#     if num == 0:
+#         blogs = []
+#     else:
+#         blogs = await Blog.findAll(where='tag', regexp="'landscape'", orderBy='created_at desc', limit=(p.offset, p.limit))
+#     return {
+#         '__template__': 'blogs_sq.html',
+#         'page': p,
+#         'blogs': blogs
+#     }
 
 ##@get('/register')
 ##def register():
